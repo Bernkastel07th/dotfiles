@@ -218,7 +218,6 @@ hook_add = '''
   " TODO: winwidth(0) を見てレスポンシブ対応
   " TODO: gitのahead/behind数表示
   let g:lightline = {
-        \ 'colorscheme': 'icebergDark',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'fugitive', 'gitgutter', 'readonly', 'relativepath', 'modified' ] ]
@@ -446,13 +445,17 @@ let g:ale_statusline_format = ['E%d', 'W%d', 'OK']
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier-eslint']
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier-eslint'],
+\}
 
 " ファイル保存時に実行
 let g:ale_fix_on_save = 1
 
 " ローカルの設定ファイルを考慮する
 let g:ale_javascript_prettier_use_local_config = 1
-'''
 
+'''

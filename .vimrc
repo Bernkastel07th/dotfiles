@@ -73,7 +73,7 @@ set smartcase
 set hlsearch
 
 " 暗い背景色に合わせた配色にする
-"set background=dark
+set background=dark
 
 " タブ入力を複数の空白入力に置き換える
 set expandtab
@@ -128,9 +128,9 @@ autocmd QuickFixCmdPost *grep* cwindow
 " ###################################
 " 自動的に閉じ括弧を入力
 " ###################################
-"imap { {}<LEFT>
-"imap [ []<LEFT>
-"imap ( ()<LEFT>
+imap { {}<LEFT>
+imap [ []<LEFT>
+imap ( ()<LEFT>
 
 
 " ###################################
@@ -178,14 +178,3 @@ if has('syntax')
   augroup END
   call ZenkakuSpace()
 endif
-
-" ###################################
-" ALEの設定
-" ###################################
-if has("autocmd")
-  augroup FiletypeGroup
-    autocmd!
-    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-  augroup END
-endif
-
