@@ -1,3 +1,93 @@
+## rust
+[[plugins]]
+# completion (C-x C-o) and navigation (:gd goto definition)
+repo = 'racer-rust/vim-racer'
+on_ft = ['rust']
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = ['rust']
+
+[[plugins]]
+repo = 'rhysd/rust-doc.vim'
+on_ft = ['rust']
+
+[[plugins]]
+repo = 'kawaz/rustsrcpath.vim'
+on_ft = ['rust']
+depends = ['vim-racer']
+
+## toml
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
+
+##  markdown
+[[plugins]]
+repo = 'joker1007/vim-markdown-quote-syntax'
+on_ft = ['markdown']
+
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+on_ft = ['markdown']
+depends = ['tabular', 'vim-markdown-quote-syntax']
+hook_add = '''
+  let g:vim_markdown_new_list_item_indent = 2
+'''
+
+[[plugins]]
+# 外部コマンドに依存しないMarkdownプレビュー、open-browser.vimとリアルタイムプレビューできて素敵
+repo = 'kannokanno/previm'
+hook_add = '''
+  " TODO: :PrevimOpen でブラウザを開けるんだがquick-runで開きたい
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = ['go']
+hook_post_source = '''
+  " MEMO: gocode set autobuild true を実行しておくとvendor内のライブラリ補完もできるようになる
+  let g:go_fmt_command = 'goimports'
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_types = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_build_constraints = 1
+  let g:go_term_enabled = 1
+  let g:go_metalinter_autosave = 1
+  let g:go_auto_type_info = 1
+  let g:go_auto_sameids = 1
+  " syntastic
+  let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+  let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+  let g:go_list_type = "quickfix"
+  " TODO: キーマップはまだ確認してないので後で確認する
+  au FileType go nmap <leader>r <Plug>(go-run)
+  au FileType go nmap <leader>b <Plug>(go-build)
+  au FileType go nmap <leader>t <Plug>(go-test)
+  au FileType go nmap <leader>c <Plug>(go-coverage)
+  au FileType go nmap <Leader>ds <Plug>(go-def-split)
+  au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+  au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+  au FileType go nmap <Leader>gd <Plug>(go-doc)
+  au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+  au FileType go nmap <Leader>s <Plug>(go-implements)
+  au FileType go nmap <Leader>i <Plug>(go-info)
+  au FileType go nmap <Leader>e <Plug>(go-rename)
+'''
+hook_post_source = '''
+  " 関連ツールの自動インストール
+  if executable('go')
+    execute 'GoInstallBinaries'
+  endif
+'''
+
+
 # python設定
 [[plugins]]
 repo = 'hynek/vim-python-pep8-indent'
@@ -39,6 +129,37 @@ repo = 'ryym/vim-riot'
 [[plugins]]
 repo = 'mhartington/nvim-typescript'
 build = './install.sh'
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+
+[[plugins]]
+repo = 'jelera/vim-javascript-syntax'
+on_ft = 'js'
+
+[[plugins]]
+repo = 'othree/yajs.vim'
+on_ft = ['javascript']
+
+[[plugins]]
+repo = 'othree/es.next.syntax.vim'
+on_ft = ['javascript']
+
+[[plugins]]
+# http://maxmellon.hateblo.jp/entry/2016/12/13/000000
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['javascript']
+hook_source = '''
+let g:vim_jsx_pretty_enable_jsx_highlight = 1
+let g:vim_jsx_pretty_colorful_config = 1
+'''
+
+[[plugins]]
+repo = 'jiangmiao/simple-javascript-indenter'
+hook_add = '''
+let g:SimpleJsIndenter_BriefMode = 1
+let g:SimpleJsIndenter_CaseIndentLevel = -1
+'''
 
 # html5
 [[plugins]]

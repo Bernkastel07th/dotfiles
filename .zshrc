@@ -1,4 +1,5 @@
 export XDG_CONFIG_HOME=$HOME/.config
+export TERM=xterm-256color
 
 function powerline_precmd() {
     PS1="$(powerline-shell --shell zsh $?)"

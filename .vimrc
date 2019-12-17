@@ -1,10 +1,7 @@
-" ###################################
+"########################################
 " dein.vimの設定
-" ###################################
-" プラグインが実際にインストールされるディレクトリ
-let s:dein_dir = expand('~/.cache/dein')
-
-" dein.vim 本体
+"########################################
+let s:dein_dir = expand('~/.cache/dein') " プラグインが実際にインストールされるディレクトリ
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " dein.vim がなければ github から落としてくる
@@ -26,7 +23,7 @@ if dein#load_state(s:dein_dir)
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
   " TOML を読み込み、キャッシュしておく
-  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " 設定終了
@@ -39,12 +36,13 @@ if dein#check_install()
   call dein#install()
 endif
 
-
-" ###################################
+"########################################
 " 基本設定
-" ###################################
+"########################################
 " シンタックスハイライトをオンにする
 syntax on
+
+colorscheme iceberg
 
 " 文字コードを正しく認識させる
 set fileformats=unix,dos,mac
@@ -75,7 +73,7 @@ set smartcase
 set hlsearch
 
 " 暗い背景色に合わせた配色にする
-set background=dark
+"set background=dark
 
 " タブ入力を複数の空白入力に置き換える
 set expandtab
@@ -145,10 +143,7 @@ if has("autocmd")
     \ endif
 endif
 
-
-" ###################################
 " KeyMap
-" ###################################
 " :vimgrep
 nnoremap [q :cprevious<CR>   " 前へ
 nnoremap ]q :cnext<CR>       " 次へ
@@ -176,11 +171,21 @@ function! ZenkakuSpace()
 endfunction
 
 if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter
-    augroup END
-    call ZenkakuSpace()
+  augroup ZenkakuSpace
+      autocmd!
+      autocmd ColorScheme * call ZenkakuSpace()
+      autocmd VimEnter,WinEnter
+  augroup END
+  call ZenkakuSpace()
+endif
+
+" ###################################
+" ALEの設定
+" ###################################
+if has("autocmd")
+  augroup FiletypeGroup
+    autocmd!
+    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  augroup END
 endif
 
