@@ -200,8 +200,12 @@ repo = 'Shougo/context_filetype.vim'
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
 
+[[plugins]]
+repo = 'gkeep/iceberg-dark'
+
 [[plugins]] # ステータスラインを手軽にかっこ良くする(要フォントパッチ)
 repo = 'itchyny/lightline.vim'
+depends = ['iceberg-dark']
 hook_add = '''
   " lightlineがあればshowmodeは不用なので消す
   set noshowmode
@@ -218,6 +222,7 @@ hook_add = '''
   " TODO: winwidth(0) を見てレスポンシブ対応
   " TODO: gitのahead/behind数表示
   let g:lightline = {
+        \ 'colorscheme': 'icebergDark',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'fugitive', 'gitgutter', 'readonly', 'relativepath', 'modified' ] ]
