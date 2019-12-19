@@ -6,7 +6,9 @@ if [ -f ~/.bashrc ] ; then
 . ~/.bashrc
 fi
 
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+if [ -f ~/.zshrc ] ; then
+. ~/.zshrc
+fi
 
 # added by Anaconda3 5.2.0 installer
 export PATH="/anaconda3/bin:$PATH"
@@ -23,4 +25,3 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
-
