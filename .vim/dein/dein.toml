@@ -61,7 +61,6 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'tagbar', 'unite']
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=23 ctermfg=252 gui=undercurl guisp=#89b8c2
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven cterm=reverse ctermbg=234 ctermfg=245 gui=reverse guibg=#17171b guifg=#818596 term=reverse
-
 '''
 
 [[plugins]]
