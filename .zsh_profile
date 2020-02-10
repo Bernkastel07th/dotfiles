@@ -14,7 +14,7 @@ fi
 export PATH="/anaconda3/bin:$PATH"
 
 # golang
-export GOPATH=$HOME/go
+export GOPATH="/usr/local/bin/go"
 export PATH=$GOPATH/bin:$PATH
 
 # android studio
