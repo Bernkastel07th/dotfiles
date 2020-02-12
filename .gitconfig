@@ -1,6 +1,5 @@
 [core]
   editor = vim
-
 [alias]
   st = !git status -s && git stash list | cat
   stt = status -uno
