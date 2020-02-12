@@ -1,4 +1,7 @@
 #!/bin/sh
+########################
+# symbolic link
+########################
 ln -sfv ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sfv ~/dotfiles/bash/.bash_profile ~/.bash_profile
 ln -sfv ~/dotfiles/bash/.bashrc ~/.bashrc
