@@ -1,11 +1,16 @@
 # --------------------
-# FZF config
+# asdf
+# --------------------
+source /usr/local/opt/asdf/asdf.fish
+
+# --------------------
+# FZF
 # --------------------
 set -U FZF_LEGACY_KEYBINDINGS 0
 set -U FZF_REVERSE_ISEARCH_OPTS "--reverse --height=100%"
 
 # --------------------
-# peco config
+# peco
 # --------------------
 set fish_plugins theme peco
 
@@ -30,7 +35,7 @@ function peco_select_history_order
 end
 
 # --------------------
-# bobthefish config
+# bobthefish
 # --------------------
 set -g fish_prompt_pwd_dir_length 0  # ディレクトリ省略しない
 set -g theme_newline_cursor yes  # プロンプトを改行した先に設ける
