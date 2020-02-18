@@ -1,207 +1,61 @@
-## rust
+##################################################
+# Language Server用
+##################################################
 [[plugins]]
-# completion (C-x C-o) and navigation (:gd goto definition)
-repo = 'racer-rust/vim-racer'
-on_ft = ['rust']
+repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
-repo = 'rust-lang/rust.vim'
-on_ft = ['rust']
-
-[[plugins]]
-repo = 'rhysd/rust-doc.vim'
-on_ft = ['rust']
-
-[[plugins]]
-repo = 'kawaz/rustsrcpath.vim'
-on_ft = ['rust']
-depends = ['vim-racer']
-
-## toml
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml']
-
-##  markdown
-[[plugins]]
-repo = 'joker1007/vim-markdown-quote-syntax'
-on_ft = ['markdown']
-
-[[plugins]]
-repo = 'rcmdnk/vim-markdown'
-on_ft = ['markdown']
-depends = ['tabular', 'vim-markdown-quote-syntax']
+repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
-  let g:vim_markdown_new_list_item_indent = 2
+" 共通設定
+let g:lsp_diagnostics_enabled = 0
+" debug
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+
+" go
+if executable('gopls')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'gopls',
+    \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+    \ 'whitelist': ['go'],
+    \ })
+endif
+
+" python
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif<Paste>
+
+" javascript
+" .git root
+if executable('typescript-language-server')
+      au User lsp_setup call lsp#register_server({
+            \ 'name': 'javascript support using typescript-language-server',
+            \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+            \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+            \ 'whitelist': ['javascript', 'javascript.jsx']
+            \ })
+endif])))}]}}))
+" package.json root
+"if executable('typescript-language-server')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'javascript support using typescript-language-server',
+"        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+"        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
+"        \ 'whitelist': ['javascript', 'javascript.jsx'],
+"        \ })
+"endif])))}]}}))
 '''
 
 [[plugins]]
-# 外部コマンドに依存しないMarkdownプレビュー、open-browser.vimとリアルタイムプレビューできて素敵
-repo = 'kannokanno/previm'
-hook_add = '''
-  " TODO: :PrevimOpen でブラウザを開けるんだがquick-runで開きたい
-'''
+repo = 'prabirshrestha/asyncomplete.vim'
 
 [[plugins]]
-repo = 'tyru/open-browser.vim'
-
-[[plugins]]
-repo = 'fatih/vim-go'
-on_ft = ['go']
-hook_post_source = '''
-  " MEMO: gocode set autobuild true を実行しておくとvendor内のライブラリ補完もできるようになる
-  let g:go_fmt_command = 'goimports'
-  let g:go_highlight_functions = 1
-  let g:go_highlight_methods = 1
-  let g:go_highlight_fields = 1
-  let g:go_highlight_types = 1
-  let g:go_highlight_operators = 1
-  let g:go_highlight_build_constraints = 1
-  let g:go_term_enabled = 1
-  let g:go_metalinter_autosave = 1
-  let g:go_auto_type_info = 1
-  let g:go_auto_sameids = 1
-  " syntastic
-  let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-  let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-  let g:go_list_type = "quickfix"
-  " TODO: キーマップはまだ確認してないので後で確認する
-  au FileType go nmap <leader>r <Plug>(go-run)
-  au FileType go nmap <leader>b <Plug>(go-build)
-  au FileType go nmap <leader>t <Plug>(go-test)
-  au FileType go nmap <leader>c <Plug>(go-coverage)
-  au FileType go nmap <Leader>ds <Plug>(go-def-split)
-  au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-  au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-  au FileType go nmap <Leader>gd <Plug>(go-doc)
-  au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-  au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-  au FileType go nmap <Leader>s <Plug>(go-implements)
-  au FileType go nmap <Leader>i <Plug>(go-info)
-  au FileType go nmap <Leader>e <Plug>(go-rename)
-'''
-hook_post_source = '''
-  " 関連ツールの自動インストール
-  if executable('go')
-    execute 'GoInstallBinaries'
-  endif
-'''
-
-
-# python設定
-[[plugins]]
-repo = 'hynek/vim-python-pep8-indent'
-on_ft = 'python'
-
-#[[plugins]]
-#repo = 'davidhalter/jedi-vim'
-#on_ft = 'python'
-
-#[[plugins]]
-#repo = 'lambdalisue/vim-pyenv'
-#depends = 'davidhalter/jedi-vim'
-#on_ft = 'python'
-
-[[plugins]]
-repo = 'jmcantrell/vim-virtualenv'
-on_ft = 'python'
-
-[[plugins]]
-repo = 'andviro/flake8-vim'
-on_ft = 'python'
-
-# C#
-[[plugins]]
-repo = 'OrangeT/vim-csharp'
-on_ft = ['cs','csi','csx']
-
-# JavaScript
-[[plugins]]
-repo = 'myhere/vim-nodejs-complete'
-on_ft = 'js'
-
-[[plugins]]
-repo = 'mxw/vim-jsx'
-
-[[plugins]]
-repo = 'ryym/vim-riot'
-
-[[plugins]]
-repo = 'mhartington/nvim-typescript'
-build = './install.sh'
-
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-
-[[plugins]]
-repo = 'jelera/vim-javascript-syntax'
-on_ft = 'js'
-
-[[plugins]]
-repo = 'othree/yajs.vim'
-on_ft = ['javascript']
-
-[[plugins]]
-repo = 'othree/es.next.syntax.vim'
-on_ft = ['javascript']
-
-[[plugins]]
-# http://maxmellon.hateblo.jp/entry/2016/12/13/000000
-repo = 'maxmellon/vim-jsx-pretty'
-on_ft = ['javascript']
-hook_source = '''
-let g:vim_jsx_pretty_enable_jsx_highlight = 1
-let g:vim_jsx_pretty_colorful_config = 1
-'''
-
-[[plugins]]
-repo = 'jiangmiao/simple-javascript-indenter'
-hook_add = '''
-let g:SimpleJsIndenter_BriefMode = 1
-let g:SimpleJsIndenter_CaseIndentLevel = -1
-'''
-
-# html5
-[[plugins]]
-repo = 'othree/html5.vim'
-on_ft = 'html'
-
-[[plugins]]
-repo = 'hokaccha/vim-html5validator'
-on_ft = 'html'
-
-# css3
-[[plugins]]
-repo = 'hail2u/vim-css3-syntax'
-on_ft = 'css'
-
-# less
-[[plugins]]
-repo = 'groenewege/vim-less'
-on_ft = 'less'
-
-# stylus
-[[plugins]]
-repo = 'wavded/vim-stylus'
-on_ft = 'stylus'
-
-# Go
-[[plugins]]
-repo = 'fatih/vim-go'
-on_ft = 'go'
-
-# pug
-[[plugins]]
-repo = 'digitaltoad/vim-pug'
-on_ft = ['jade','pug']
-
-# postcss
-[[plugins]]
-repo = 'alexlafroscia/postcss-syntax.vim'
-on_ft = ['sss']
-
-# 一般設定
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-on_i = 1
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
