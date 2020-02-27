@@ -144,6 +144,7 @@ hook_post_source = '''
     let g:neocomplete#text_mode_filetypes[t] = 1
   endfor
 '''
+
 [[plugins]] # 英単語が補完されるようになる(neocompleteから呼ばれる)
 repo = 'ujihisa/neco-look'
 on_i = 1
@@ -281,13 +282,14 @@ hook_add = '''
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
   endfunction
   if s:dein_enabled && dein#tap('lightline.vim')
-  let g:lightline = {
-        \'active': {
-              \'right': [['ale']]},
-        \'component_function': {
-              \'ale': 'LLAle',
-              \},
-        \}
+    let g:lightline = {
+          \'active': {
+                \'right': [['ale']]},
+          \'component_function': {
+                \'ale': 'LLAle',
+                \},
+          \}
+  endif
   if dein#tap('ale')
     function! LLAle()
       let l:count = ale#statusline#Count(bufnr(''))
@@ -443,9 +445,6 @@ repo = 'mattn/emmet-vim'
 repo = 'tpope/vim-surround'
 
 [[plugins]]
-repo = 'rizzatti/dash.vim'
-
-[[plugins]]
 repo = 'dense-analysis/ale'
 hook_add = '''
 let g:ale_statusline_format = ['E%d', 'W%d', 'OK']
@@ -459,6 +458,7 @@ let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier-eslint'],
+\   'css': ['prettier']
 \}
 
 " ファイル保存時に実行
@@ -470,4 +470,14 @@ let g:ale_javascript_prettier_use_local_config = 1
 '''
 
 [[plugins]]
+# ファイルの一括リネーム
 repo = 'qpkorr/vim-renamer'
+
+[[plugins]]
+# 言語ごとの機能拡張をサポートする言語サーバークライアント
+repo = 'neoclide/coc.nvim'
+build = './install.sh nightly'
+hook_add = '''
+source ~/.config/nvim/coc-options.vim
+source ~/.config/nvim/coc-settings.json
+'''

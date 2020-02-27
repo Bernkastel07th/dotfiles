@@ -12,7 +12,7 @@ ln -sfv ~/dotfiles/.powerline-shell.json ~/.powerline-shell.json
 ln -sfv ~/dotfiles/.gitconfig ~/.gitconfig
 ln -sfv ~/dotfiles/.vim ~/
 ln -sfv ~/dotfiles/.vimrc ~/.vimrc
-ln -sfv ${HOME}/.vim/colors ~/.config/nvim/colors
-ln -sfv ${HOME}/.vim/dein ~/.config/nvim/dein
-ln -sfv ${HOME}/.vim/ftplugin ~/.config/nvim/ftplugin
+ln -sfv ~/dotfiles/.vim ~/.config/nvim
 ln -snv ${HOME}/.vimrc ~/.config/nvim/init.vim
+ln -sfv ${HOME}/.vim/coc-options.vim ~/.config/nvim/coc-options.vim
+ln -sfv ${HOME}/.vim/coc-settings.json ~/.config/nvim/coc-settings.json
