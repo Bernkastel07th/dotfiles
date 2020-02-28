@@ -51,12 +51,12 @@ syntax on
 
 colorscheme iceberg
 
+" coc-prettierの設定
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
 " 文字コードを正しく認識させる
 set fileformats=unix,dos,mac
 set fileencodings=utf-8,sjis
-
-" タグファイルの指定
-set tags=~/.tags
 
 " スワップファイルは使わない(ときどき面倒な警告が出るだけで役に立ったことがない)
 set noswapfile
@@ -131,14 +131,12 @@ augroup END
 " 検索
 autocmd QuickFixCmdPost *grep* cwindow
 
-
 " ###################################
 " 自動的に閉じ括弧を入力
 " ###################################
 imap { {}<LEFT>
 imap [ []<LEFT>
 imap ( ()<LEFT>
-
 
 " ###################################
 " 最後のカーソル位置を復元する
@@ -150,13 +148,14 @@ if has("autocmd")
     \ endif
 endif
 
+" ###################################
 " KeyMap
+" ###################################
 " :vimgrep
 nnoremap [q :cprevious<CR>   " 前へ
 nnoremap ]q :cnext<CR>       " 次へ
 nnoremap [Q :<C-u>cfirst<CR> " 最初へ
 nnoremap ]Q :<C-u>clast<CR>  " 最後へ
-
 " neovim terminal mapping
 if has('nvim')
   " 新しいタブでターミナルを起動
