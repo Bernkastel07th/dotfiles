@@ -46,10 +46,12 @@ endif
 "########################################
 " 基本設定
 "########################################
+colorscheme iceberg
 " シンタックスハイライトをオンにする
 syntax on
-
-colorscheme iceberg
+set t_Co=256
+set termguicolors
+set background=dark
 
 " coc-prettierの設定
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
@@ -78,9 +80,6 @@ set smartcase
 
 " 検索結果をハイライト表示する
 set hlsearch
-
-" 暗い背景色に合わせた配色にする
-set background=dark
 
 " タブ入力を複数の空白入力に置き換える
 set expandtab
@@ -111,12 +110,6 @@ set smarttab
 
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,,[,]
-
-" 行番号の色を設定
-hi LineNr ctermbg=22 ctermfg=3
-hi CursorLineNr ctermbg=4 ctermfg=0
-set cursorline
-hi clear CursorLine
 
 " タブ、空白、改行の可視化
 set list
