@@ -124,6 +124,9 @@ augroup END
 " 検索
 autocmd QuickFixCmdPost *grep* cwindow
 
+" <Leader>キーのマッピング
+let mapleader = ","
+
 " ###################################
 " 自動的に閉じ括弧を入力
 " ###################################

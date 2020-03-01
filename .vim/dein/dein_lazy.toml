@@ -227,11 +227,19 @@ repo = 'machakann/vim-swap'
 
 [[plugins]]
 # indentの可視化
-repo = 'Yggdroot/indentLine'
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd guibg=green ctermfg=3
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd guibg=red ctermfg=4
+'''
 
 [[plugins]]
 # 単語上で K でftに対応したdevdocs検索が出来るようにする http://bit.ly/1sbXZnf
 repo = 'rhysd/devdocs.vim'
 hook_add = '''
-  autocmd FileType c,cpp,rust,haskell,python,go,javascript,ruby,php nmap <buffer>K <Plug>(devdocs-under-cursor)
+autocmd FileType c,cpp,rust,haskell,python,go,javascript,ruby,php nmap <buffer>K <Plug>(devdocs-under-cursor)
 '''
