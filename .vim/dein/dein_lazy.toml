@@ -74,12 +74,11 @@ for [key, value] in items(s:denite_default_options)
   call add(s:denite_option_array, '-'.key.'='.value)
 endfor
 call denite#custom#option('default', s:denite_default_options)
-
 call denite#custom#var('file/rec', 'command',
     \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
     \ [ '.git/', '.ropeproject/', '__pycache__/',
-    \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+    \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', 'node_modules'])
 " Ag command on grep source
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
@@ -227,14 +226,16 @@ repo = 'machakann/vim-swap'
 
 [[plugins]]
 # indentの可視化
-repo = 'nathanaelkane/vim-indent-guides'
-hook_add = '''
+repo = 'nathanaelkane/vim-indent-guides'↲
+hook_add = '''↲
+" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする↲
 let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_exclude_filetypes = ['help', 'tagbar', 'denite']
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd guibg=green ctermfg=3
-autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd guibg=red ctermfg=4
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=23 ctermfg=252 gui=undercurl guisp=#89b8c2
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven cterm=reverse ctermbg=234 ctermfg=245 gui=reverse guibg=#17171b guifg=#818596 term=reverse
 '''
 
 [[plugins]]
