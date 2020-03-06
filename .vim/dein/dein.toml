@@ -1,34 +1,6 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
-repo = 'osyo-manga/vim-precious'
-depends = ['context_filetype.vim']
-hook_add = '''
-  " NORMALモードのカーソル移動中に頻繁に切り替わるとうざいのでデフォは無効化しておく(helpは例外)
-  let g:precious_enable_switch_CursorMoved = { '*': 0, 'help': 1 }
-
-  " INSERTモードのON/OFFに合わせてトグル
-  " autocmd  InsertEnter * :PreciousSwitch
-  " autocmd  InsertLeave * :PreciousRese
-'''
-
-[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
-repo = 'Shougo/context_filetype.vim'
-
-[[plugins]] # 行番号の左側にdiffの+-とかが表示されるようにする、[c と ]c で前後のHunkに移動できる。
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-  let g:gitgutter_sign_modified = 'M'
-  let g:gitgutter_max_signs = 5000
-  " カレント行のhunkについて diff/add/reset を行うマップを追加
-  nmap <Leader>hs <Plug>GitGutterStageHunk
-  nmap <Leader>ha <Plug>GitGutterStageHunk
-  nmap <Leader>hr <Plug>GitGutterRevertHunk
-  nmap <Leader>hp <Plug>GitGutterPreviewHunk
-  nmap <Leader>hd <Plug>GitGutterPreviewHunk
-'''
-
 [[plugins]]
 repo = 'tyru/vim-altercmd'
 on_event = ['VimEnter']
@@ -39,192 +11,8 @@ hook_source = '''
   CAlterCommand h[elp] vertical belowright help
   " helpを横分割で右側に開く
   CAlterCommand e tabnew
-'''
-
-[[plugins]]
-# 言語ごとの機能拡張をサポートする言語サーバークライアント
-repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
-merged = '0'
-hook_add = '''
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  " Remap for rename current word
-  nmap <leader>rn <Plug>(coc-rename)
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  " Use K for show documentation in preview window
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-  function! s:show_documentation()
-    if &filetype == 'vim'
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
-'''
-
-[[plugins]] # ステータスラインを手軽にかっこ良くする(要フォントパッチ)
-repo = 'itchyny/lightline.vim'
-hook_add = '''
-" lightlineがあればshowmodeは不用なので消す
-set noshowmode
-" ステータスラインを常に表示
-set laststatus=2
-" フォントパッチが何種類かあるのでコードでメモ
-let s:powerfonts = {
-      \ 'powerline':     { 'left':"\ue0b0", 'leftsub':"\ue0b1", 'right':"\ue0b2", 'rightsub':"\ue0b3", 'branch':"\ue0a0", 'linecolumn':"\ue0a1", 'readonly':"\ue0a2" },
-      \ 'vim-powerline': { 'left':"\u2b80", 'leftsub':"\u2b81", 'right':"\u2b82", 'rightsub':"\u2b83", 'branch':"\u2b60", 'linecolumn':"\u2b81", 'readonly':"\u2b64" }
-      \ }
-" Patched fonts for Powerline https://github.com/powerline/fonts
-let s:powerfont = s:powerfonts['powerline']
-let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'mode_map': {'c': 'NORMAL'},
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-        \ },
-        \ 'component_function': {
-        \   'modified': 'LightlineModified',
-        \   'readonly': 'LightlineReadonly',
-        \   'fugitive': 'LightlineFugitive',
-        \   'filename': 'LightlineFilename',
-        \   'fileformat': 'LightlineFileformat',
-        \   'filetype': 'LightlineFiletype',
-        \   'fileencoding': 'LightlineFileencoding',
-        \   'mode': 'LightlineMode'
-        \ }
-        \ }
-
-function! LightlineModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightlineReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
-endfunction
-
-function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
-
-function! LightlineFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    return fugitive#head()
-  else
-    return ''
-  endif
-endfunction
-
-function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightlineFileencoding()
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-
-function! LightlineMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-'''
-
-[[plugins]]
-# ツリー状のundo履歴をブラウズする :GundoTree
-repo = 'sjl/gundo.vim'
-
-[[plugins]]
-# cssの色をプレビュー
-repo = 'lilydjwg/colorizer'
-
-[[plugins]]
-# emmet
-repo = 'mattn/emmet-vim'
-
-[[plugins]]
-# テキストを囲うやつ
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-# ファイルの一括リネーム
-repo = 'qpkorr/vim-renamer'
-
-[[plugins]]
-# 全角と半角の空白文字を可視化
-repo = 'bronson/vim-trailing-whitespace'
-
-[[plugins]]
-# :Tabularize /, とかでアライン整形（使い方メモ http://teotr.github.io/blog/2011/04/15/tabular/
-repo = 'godlygeek/tabular'
-
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
-
-[[plugins]]
-# g> g< gs で引数の位置交換を簡単に行う
-repo = 'machakann/vim-swap'
-
-[[plugins]]
-repo = 'Yggdroot/indentLine'
-hook_add = '''
-let g:indentLine_faster = 1
-nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
-'''
-
-[[plugins]]
-# 単語上で K でftに対応したdevdocs検索が出来るようにする http://bit.ly/1sbXZnf
-repo = 'rhysd/devdocs.vim'
-hook_add = '''
-autocmd FileType c,cpp,rust,haskell,python,go,javascript,ruby,php nmap <buffer>K <Plug>(devdocs-under-cursor)
-'''
-
-[[plugins]]
-repo = 'dense-analysis/ale'
-hook_add = '''
-let g:ale_statusline_format = ['E%d', 'W%d', 'OK']
-
-" エラー間を移動するキーマップ
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['prettier-eslint'],
-\   'css': ['prettier']
-\}
-
-" ファイル保存時に実行
-let g:ale_fix_on_save = 1
-
-" ローカルの設定ファイルを考慮する
-let g:ale_javascript_prettier_use_local_config = 1
-'''
-
-[[plugins]]
-repo     = 'prettier/vim-prettier'
-build    = 'npm install'
-on_ft    = ['javascript', 'typescript', 'vue', 'css', 'scss', 'json', 'markdown']
-hook_source = '''
-  " @formatアノテーションを持ったファイルの自動フォーマットを無効にする
-  let g:prettier#autoformat = 0
-
-  " Prettierのパースエラーをquickfixに表示しない
-  let g:prettier#quickfix_enabled = 0
-
-  autocmd BufWritePre *.js,*.ts,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
+  " Denite file
+  CAlterCommand d Denite file
 '''
 
 [[plugins]]
@@ -295,4 +83,183 @@ command! Dprev execute(':Denite -resume -buffer-name=grep-buffer-denite -cursor-
 " keymap
 call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
+'''
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+hook_add = '''
+let g:ale_statusline_format = ['E%d', 'W%d', 'OK']
+
+" エラー間を移動するキーマップ
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier-eslint'],
+\   'css': ['prettier']
+\}
+
+" ファイル保存時に実行
+let g:ale_fix_on_save = 1
+
+" ローカルの設定ファイルを考慮する
+let g:ale_javascript_prettier_use_local_config = 1
+'''
+
+[[plugins]]
+repo     = 'prettier/vim-prettier'
+build    = 'npm install'
+on_ft    = ['javascript', 'typescript', 'vue', 'css', 'scss', 'json', 'markdown']
+hook_source = '''
+  " @formatアノテーションを持ったファイルの自動フォーマットを無効にする
+  let g:prettier#autoformat = 0
+
+  " Prettierのパースエラーをquickfixに表示しない
+  let g:prettier#quickfix_enabled = 0
+
+  autocmd BufWritePre *.js,*.ts,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
+'''
+
+[[plugins]]
+# カーソル位置のコンテキストに合わせてftを切り替える
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+hook_add = '''
+  " NORMALモードのカーソル移動中に頻繁に切り替わるとうざいのでデフォは無効化しておく(helpは例外)
+  let g:precious_enable_switch_CursorMoved = { '*': 0, 'help': 1 }
+
+  " INSERTモードのON/OFFに合わせてトグル
+  " autocmd  InsertEnter * :PreciousSwitch
+  " autocmd  InsertLeave * :PreciousRese
+'''
+
+[[plugins]]
+# カーソル位置のコンテキストのftを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+# 行番号の左側にdiffの+-とかが表示されるようにする、[c と ]c で前後のHunkに移動できる。
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  let g:gitgutter_sign_modified = 'M'
+  let g:gitgutter_max_signs = 5000
+  " カレント行のhunkについて diff/add/reset を行うマップを追加
+  nmap <Leader>hs <Plug>GitGutterStageHunk
+  nmap <Leader>ha <Plug>GitGutterStageHunk
+  nmap <Leader>hr <Plug>GitGutterRevertHunk
+  nmap <Leader>hp <Plug>GitGutterPreviewHunk
+  nmap <Leader>hd <Plug>GitGutterPreviewHunk
+'''
+
+[[plugins]]
+# 言語ごとの機能拡張をサポートする言語サーバークライアント
+repo = 'neoclide/coc.nvim'
+build = './install.sh nightly'
+merged = '0'
+hook_add = '''
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  " Remap for rename current word
+  nmap <leader>rn <Plug>(coc-rename)
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Use K for show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+'''
+
+[[plugins]]
+# ステータスラインを手軽にかっこ良くする(要フォントパッチ: Powerline)
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+" lightlineがあればshowmodeは不用なので消す
+set noshowmode
+" ステータスラインを常に表示
+set laststatus=2
+" フォントパッチが何種類かあるのでコードでメモ
+let s:powerfonts = {
+      \ 'powerline':     { 'left':"\ue0b0", 'leftsub':"\ue0b1", 'right':"\ue0b2", 'rightsub':"\ue0b3", 'branch':"\ue0a0", 'linecolumn':"\ue0a1", 'readonly':"\ue0a2" },
+      \ 'vim-powerline': { 'left':"\u2b80", 'leftsub':"\u2b81", 'right':"\u2b82", 'rightsub':"\u2b83", 'branch':"\u2b60", 'linecolumn':"\u2b81", 'readonly':"\u2b64" }
+      \ }
+" Patched fonts for Powerline https://github.com/powerline/fonts
+let s:powerfont = s:powerfonts['powerline']
+let g:lightline = {
+        \ 'colorscheme': 'wombat',
+        \ 'mode_map': {'c': 'NORMAL'},
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'gitbranch': 'FugitiveHead'
+        \ }
+        \ }
+'''
+
+[[plugins]]
+# iconセット(要フォントパッチ: NerdFontを使う)
+# Patched fonts for NerdFont https://github.com/ryanoasis/nerd-fonts#font-installation
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+# スコープごとにタグをウィンドウに表示するVimプラグイン
+repo = 'majutsushi/tagbar'
+
+[[plugins]]
+# ツリー状のundo履歴をブラウズする :GundoTree
+repo = 'sjl/gundo.vim'
+
+[[plugins]]
+# cssの色をプレビュー
+repo = 'lilydjwg/colorizer'
+
+[[plugins]]
+# emmet
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+# テキストを囲うやつ
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+# ファイルの一括リネーム
+repo = 'qpkorr/vim-renamer'
+
+[[plugins]]
+# 全角と半角の空白文字を可視化
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+# :Tabularize /, とかでアライン整形（使い方メモ http://teotr.github.io/blog/2011/04/15/tabular/
+repo = 'godlygeek/tabular'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+# g> g< gs で引数の位置交換を簡単に行う
+repo = 'machakann/vim-swap'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+let g:indentLine_faster = 1
+nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+'''
+
+[[plugins]]
+# 単語上で K でftに対応したdevdocs検索が出来るようにする http://bit.ly/1sbXZnf
+repo = 'rhysd/devdocs.vim'
+hook_add = '''
+autocmd FileType c,cpp,rust,haskell,python,go,javascript,ruby,php nmap <buffer>K <Plug>(devdocs-under-cursor)
 '''

@@ -10,13 +10,3 @@ on_ft = 'toml'
 [[plugins]]
 repo = 'kawaz/shellcheck.vim'
 on_ft = ['sh']
-
-[[plugins]]
-repo = 'billyvg/tigris.nvim'
-build = './install.sh'
-on_ft = ['javascript', 'javascript.jsx']
-hook_add = '''
-let g:tigris#enabled = 1
-let g:tigris#on_the_fly_enabled = 1
-let g:tigris#delay = 300
-'''
