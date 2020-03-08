@@ -83,6 +83,9 @@ set number
 " カーソルが何行目の何列目に置かれているかを表示する
 set ruler
 
+" 行を強調表示
+set cursorline
+
 " コマンドラインに使われる画面上の行数
 set cmdheight=2
 

@@ -11,8 +11,15 @@ hook_source = '''
   CAlterCommand h[elp] vertical belowright help
   " helpを横分割で右側に開く
   CAlterCommand e tabnew
-  " Denite file
+  " Denite
   CAlterCommand d Denite file
+  CAlterCommand dr Denite file/rec
+  " Tabularize
+  CAlterCommand arize Tabularize
+  " Prettier
+  CAlterCommand pr Prettier
+  " GundoTree
+  CAlterCommand gundo GundoTree
 '''
 
 [[plugins]]
