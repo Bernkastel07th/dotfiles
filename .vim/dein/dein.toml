@@ -12,7 +12,7 @@ hook_source = '''
   " helpを横分割で右側に開く
   CAlterCommand e tabnew
   " Denite
-  CAlterCommand d Denite file
+  CAlterCommand df Denite file
   CAlterCommand dr Denite file/rec
   " Tabularize
   CAlterCommand arize Tabularize
@@ -205,12 +205,27 @@ let g:lightline = {
         \ 'colorscheme': 'wombat',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+        \   'left': [
+        \     [ 'mode', 'paste' ],
+        \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+        \   ],
+        \   'right': [
+        \     [ 'lineinfo' ],
+        \     [ 'percent' ],
+        \     [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ]
+        \   ]
+        \ },
+        \ 'component': {
+        \   'charvaluehex': '0x%B',
         \ },
         \ 'component_function': {
-        \   'gitbranch': 'FugitiveHead'
+        \   'gitbranch': 'FugitiveHead',
+        \   'readonly': 'LightlineReadonly',
+        \ },
         \ }
-        \ }
+function! LightlineReadonly()
+  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
 '''
 
 [[plugins]]
@@ -270,3 +285,7 @@ repo = 'rhysd/devdocs.vim'
 hook_add = '''
 autocmd FileType c,cpp,rust,haskell,python,go,javascript,ruby,php nmap <buffer>K <Plug>(devdocs-under-cursor)
 '''
+
+[[plugins]]
+repo = 'shuntaka9576/preview-swagger.nvim'
+build = 'yarn install'
