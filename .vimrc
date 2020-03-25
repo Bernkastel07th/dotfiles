@@ -2,7 +2,8 @@
 " dein.vimの設定
 "########################################
 " pythonのパス指定
-let g:python_host_prog = expand('/usr/bin/python2')
+" python2 provider disabled
+let g:loaded_python_provider = 0
 let g:python3_host_prog = expand('~/.asdf/shims/python3')
 
 let s:dein_dir = expand('~/.cache/dein') " プラグインが実際にインストールされるディレクトリ

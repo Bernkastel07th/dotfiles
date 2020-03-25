@@ -2,15 +2,17 @@ let SessionLoad = 1
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/dotfiles
+cd ~/WorkSpace/teamlab/lab-goods-ec-app-printer
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 fish/config.fish
+badd +7 package.json
+badd +15 main.js
 argglobal
 %argdel
-edit fish/config.fish
+$argadd package.json
+edit main.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -29,11 +31,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 26) / 52)
+let s:l = 44 - ((36 * winheight(0) + 26) / 52)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
+44
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

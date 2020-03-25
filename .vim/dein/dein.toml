@@ -187,6 +187,25 @@ hook_add = '''
 '''
 
 [[plugins]]
+# vim上でgitを扱えるCUI
+repo = 'tpope/vim-fugitive'
+hook_source = '''
+nnoremap <leader>gs :tab sp<CR>:Gstatus<CR>:only<CR>
+nnoremap <leader>ga :Gwrite<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gl :Git log<CR>
+nnoremap <leader>gh :tab sp<CR>:0Glog<CR>
+" abbrev for `git history`: create new quickfix tab for history
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gf :Gfetch<CR>
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap <leader>gr :Grebase -i<CR>
+nnoremap <leader>gg :Ggrep
+nnoremap <leader>gm :Gmerge
+'''
+
+[[plugins]]
 # ステータスラインを手軽にかっこ良くする(要フォントパッチ: Powerline)
 repo = 'itchyny/lightline.vim'
 hook_add = '''
@@ -205,27 +224,31 @@ let g:lightline = {
         \ 'colorscheme': 'wombat',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [
-        \     [ 'mode', 'paste' ],
-        \     [ 'gitbranch', 'readonly', 'filename', 'modified' ]
-        \   ],
-        \   'right': [
-        \     [ 'lineinfo' ],
-        \     [ 'percent' ],
-        \     [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ]
-        \   ]
-        \ },
-        \ 'component': {
-        \   'charvaluehex': '0x%B',
-        \ },
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+        \  },
         \ 'component_function': {
-        \   'gitbranch': 'FugitiveHead',
-        \   'readonly': 'LightlineReadonly',
-        \ },
+        \   'modified': 'LightlineModified',
+        \   'fugitive': 'LightlineFugitive',
+        \   'readonly': 'LightlineReadonly'
         \ }
+        \ }
+
+function! LightlineModified()
+  return &ft =~ 'help\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineFugitive()
+  if &ft !~? 'gundo' && exists('fugitive#head')
+    return fugitive#head()
+  else
+    return ''
+  endif
+endfunction
+
 function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
+
 '''
 
 [[plugins]]
@@ -277,6 +300,12 @@ repo = 'Yggdroot/indentLine'
 hook_add = '''
 let g:indentLine_faster = 1
 nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+'''
+
+[[plugins]]
+repo = 'elzr/vim-json'
+hook_add = '''
+let g:vim_json_syntax_conceal = 0
 '''
 
 [[plugins]]
