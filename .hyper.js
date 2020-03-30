@@ -136,7 +136,12 @@ module.exports = {
 
     // Whether to use the WebGL renderer. Set it to false to use canvas-based
     // rendering (slower, but supports transparent backgrounds)
-    webGLRenderer: true
+    webGLRenderer: true,
+
+    // hyper-pokemon
+    pokemon: "gengar",
+    unibody: "true",
+    poketab: "true"
   },
 
   // a list of plugins to fetch and install from npm
@@ -145,7 +150,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyper-iceberg", "hyper-tab-icons-plus"],
+  plugins: ["hyper-iceberg", "hyper-tab-icons-plus", "hyper-pokemon"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

@@ -1,11 +1,20 @@
-"########################################
-" dein.vimの設定
-"########################################
+" initial settings {{{
 " pythonのパス指定
 " python2 provider disabled
 let g:loaded_python_provider = 0
 let g:python3_host_prog = expand('~/.asdf/shims/python3')
 
+if !&compatible
+  set nocompatible
+endif
+
+" reset augroup
+augroup MyAutoCmd
+  autocmd!
+augroup END
+" }}}
+
+" dein.vim settings {{{
 let s:dein_dir = expand('~/.cache/dein') " プラグインが実際にインストールされるディレクトリ
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
@@ -40,11 +49,9 @@ endif
 if dein#check_install()
   call dein#install()
 endif
+" }}}
 
-"########################################
-" 基本設定
-"########################################
-colorscheme iceberg
+" editor settings {{{
 " シンタックスハイライトをオンにする
 syntax on
 set t_Co=256
@@ -145,26 +152,35 @@ autocmd QuickFixCmdPost *grep* cwindow
 " <Leader>キーのマッピング
 let mapleader = ","
 
-" ###################################
 " 自動的に閉じ括弧を入力
-" ###################################
 imap { {}<LEFT>
 imap [ []<LEFT>
 imap ( ()<LEFT>
 
-" ###################################
 " 最後のカーソル位置を復元する
-" ###################################
 if has("autocmd")
-    autocmd BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-    \   exe "normal! g'\"" |
-    \ endif
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\"" |
+  \ endif
 endif
 
-" ###################################
-" KeyMap
-" ###################################
+" 全角スペースの可視化
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=reverse ctermfg=red gui=reverse guibg=red
+endfunction
+
+if has('syntax')
+  augroup ZenkakuSpace
+      autocmd!
+      autocmd ColorScheme * call ZenkakuSpace()
+      autocmd VimEnter,WinEnter
+  augroup END
+  call ZenkakuSpace()
+endif
+" }}}
+
+" keymap settings {{{
 " :vimgrep
 nnoremap [q :cprevious<CR>   " 前へ
 nnoremap ]q :cnext<CR>       " 次へ
@@ -182,19 +198,4 @@ if has('nvim')
   tnoremap <C-l> <C-\><C-n>gt
   tnoremap <C-h> <C-\><C-n>gT
 endif
-
-" ###################################
-" 全角スペースの可視化
-" ###################################
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=red gui=reverse guibg=red
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-      autocmd!
-      autocmd ColorScheme * call ZenkakuSpace()
-      autocmd VimEnter,WinEnter
-  augroup END
-  call ZenkakuSpace()
-endif
+" }}}
