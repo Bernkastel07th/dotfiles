@@ -13,6 +13,7 @@ ln -sfv ~/dotfiles/.gitconfig ~/.gitconfig
 ln -sfv ~/dotfiles/.vim ~/
 ln -sfv ~/dotfiles/.vimrc ~/.vimrc
 ln -sfv ~/dotfiles/.vim ~/.config/nvim
+ln -sfv ~/dotfiles/.hyper.js ~/.hyper.js
 ln -snv ${HOME}/.vimrc ~/.config/nvim/init.vim
 ln -sfv ${HOME}/.vim/coc-options.vim ~/.config/nvim/coc-options.vim
 ln -sfv ${HOME}/.vim/coc-settings.json ~/.config/nvim/coc-settings.json

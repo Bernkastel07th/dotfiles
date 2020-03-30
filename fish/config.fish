@@ -1,4 +1,9 @@
 # --------------------
+# Neovim
+# --------------------
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+
+# --------------------
 # TrueColor
 # --------------------
 set -g TERM xterm-256color
