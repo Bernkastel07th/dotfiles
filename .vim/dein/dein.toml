@@ -9,7 +9,7 @@ hook_source = '''
   call altercmd#load()
   " helpを横分割で右側に開く
   CAlterCommand h[elp] vertical belowright help
-  " helpを横分割で右側に開く
+  " 新しいタブを開く
   CAlterCommand e tabnew
   " Denite
   CAlterCommand df Denite file
