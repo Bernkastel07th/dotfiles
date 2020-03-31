@@ -12,6 +12,11 @@ endif
 augroup MyAutoCmd
   autocmd!
 augroup END
+
+" coc-prettierの設定
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " }}}
 
 " dein.vim settings {{{
@@ -55,15 +60,16 @@ endif
 " シンタックスハイライトをオンにする
 syntax on
 set t_Co=256
+" to enable setting true color
 set termguicolors
 " $TERMがxterm以外のときは以下を設定する必要がある。
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 文字色
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
 set background=dark
 
-" coc-prettierの設定
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" 補完などに使われるポップアップメニューを半透明化
+" 0 <= pumblend <= 100
+set pumblend=10
 
 " guifontを設定しないと文字化けになる。terminalで行ったフォントの設定と同様
 " 公式サイトではLinuxとmacOSの設定が若干異なるが、Linuxの設定でもmacOSで問題なし
@@ -178,6 +184,53 @@ if has('syntax')
   augroup END
   call ZenkakuSpace()
 endif
+
+" tab settings {{{
+" Anywhere SID.
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
+
+" Set tabline.
+function! s:my_tabline()  "{{{
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let no = i  " display 0-origin tabpagenr.
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = '[' . title . ']'
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+set showtabline=2 " 常にタブラインを表示
+
+" The prefix key.
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+" Tab jump
+for n in range(1, 9)
+  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+" tc 新しいタブを一番右に作る
+map <silent> [Tag]x :tabclose<CR>
+" tx タブを閉じる
+map <silent> [Tag]n :tabnext<CR>
+" tn 次のタブ
+map <silent> [Tag]p :tabprevious<CR>
+" tp 前のタブ
+" }}} tag settings end
 " }}}
 
 " keymap settings {{{

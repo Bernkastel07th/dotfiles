@@ -60,6 +60,9 @@ augroup denite_filter
     nnoremap <silent><buffer><expr> <Space>
     \ denite#do_map('toggle_select').'j'
   endfunction
+  " 半透明化
+  autocmd FileType denite set winblend=10
+  autocmd FileType denite-filter set winblend=10
 augroup END
 " use floating
 let s:denite_win_width_percent = 0.85
