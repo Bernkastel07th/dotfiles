@@ -16,7 +16,6 @@ augroup END
 " coc-prettierの設定
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " }}}
 
 " dein.vim settings {{{
@@ -54,7 +53,7 @@ endif
 if dein#check_install()
   call dein#install()
 endif
-" }}}
+" }}} initial settings end
 
 " editor settings {{{
 " シンタックスハイライトをオンにする
@@ -230,8 +229,12 @@ map <silent> [Tag]n :tabnext<CR>
 " tn 次のタブ
 map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
+map <silent> [Tag]f :tabfirst<CR>
+" tf 最初のタブ
+map <silent> [Tag]l :tablast<CR>
+" tl 最後のタブ
 " }}} tag settings end
-" }}}
+" }}} editor settings end
 
 " keymap settings {{{
 " :vimgrep
@@ -251,4 +254,4 @@ if has('nvim')
   tnoremap <C-l> <C-\><C-n>gt
   tnoremap <C-h> <C-\><C-n>gT
 endif
-" }}}
+" }}} keymap settings end
