@@ -67,10 +67,3 @@ set -g theme_display_cmd_duration no  # コマンド実行時間の非表示
 # --------------------
 set -x PATH /usr/local/opt/icu4c/bin $PATH
 set -U fish_user_paths /usr/local/opt/icu4c/sbin $PATH
-
-# --------------------
-# keymapping
-# --------------------
-function fish_user_key_bindings
-  bind /cr 'peco_select_history_order' # Ctrl + R
-end
