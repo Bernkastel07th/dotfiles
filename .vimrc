@@ -1,4 +1,5 @@
 " initial settings {{{
+
 " pythonのパス指定
 " python2 provider disabled
 let g:loaded_python_provider = 0
@@ -28,6 +29,11 @@ if &runtimepath !~# '/dein.vim'
     execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
   execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+if !has('nvim')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('roxma/vim-hug-neovim-rpc')
 endif
 
 " 設定開始
