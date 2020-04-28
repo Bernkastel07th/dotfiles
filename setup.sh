@@ -8,7 +8,6 @@ do
   ln -sfv $HOME/dotfiles/$file $HOME/$file
 done
 
-exit 2
 sh ./brew.sh
 # }}}
 

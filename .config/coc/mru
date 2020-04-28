@@ -1,5 +1,6 @@
-/Users/satokoki/dotfiles/.config/nvim/init.vim
 /Users/satokoki/dotfiles/setup.sh
+/Users/satokoki/dotfiles/.config/nvim/dein/dein.toml
+/Users/satokoki/dotfiles/.config/nvim/init.vim
 /Users/satokoki/dotfiles/.gitconfig
 /Users/satokoki/dotfiles/brew.sh
 /Users/satokoki/dotfiles/.vim/dein/dein.toml
