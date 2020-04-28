@@ -1,5 +1,8 @@
+[user]
+	name = Bernkastel07th
+	email = koki.sato.work@gmail.com
 [core]
-  editor = vim
+  editor = nvim
 [alias]
   st = !git status -s && git stash list | cat
   stt = status -uno
@@ -16,9 +19,6 @@
   ph = push origin HEAD
   pr = pull --rebase origin
   f = fetch
-[user]
-	name = Bernkastel07th
-	email = koki.sato.work@gmail.com
 [credential]
 	helper = osxkeychain
 [filter "lfs"]
