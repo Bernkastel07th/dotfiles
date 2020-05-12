@@ -1,4 +1,9 @@
 # --------------------
+# git
+# --------------------
+set -x PATH /usr/local/opt/git/bin $PATH
+
+# --------------------
 # Neovim
 # --------------------
 set -gx XDG_CONFIG_HOME "$HOME/.config"
