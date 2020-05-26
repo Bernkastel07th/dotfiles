@@ -191,8 +191,9 @@ nmap <Leader>hd <Plug>GitGutterPreviewHunk
 [[plugins]]
 # 言語ごとの機能拡張をサポートする言語サーバークライアント
 repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
 merged = '0'
+branch = 'release'
+build = 'yarn install --frozen-lockfile'
 hook_add = '''
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
