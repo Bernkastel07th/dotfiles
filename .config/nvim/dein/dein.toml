@@ -2,27 +2,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'tyru/vim-altercmd'
-on_event = ['VimEnter']
-hook_source = '''
-" 使うには初期化処理が必要
-call altercmd#load()
-" helpを横分割で右側に開く
-CAlterCommand h[elp] vertical belowright help
-" 新しいタブを開く
-CAlterCommand e tabnew
-" Denite
-CAlterCommand df Denite file
-CAlterCommand dr Denite file/rec
-" Tabularize
-CAlterCommand arize Tabularize
-" Prettier
-CAlterCommand pr Prettier
-" GundoTree
-CAlterCommand gundo GundoTree
-'''
-
-[[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
 set background=dark
@@ -217,6 +196,12 @@ endfunction
 [[plugins]]
 # vim上でgitを扱えるCUI
 repo = 'tpope/vim-fugitive'
+hook_add = '''
+" grep検索の実行後にQuickFix Listを表示する
+autocmd QuickFixCmdPost *grep* cwindow
+" ステータス行に現在のgitブランチを表示する
+set statusline+=%{fugitive#statusline()}
+'''
 hook_source = '''
 nnoremap <leader>gs :tab sp<CR>:Gstatus<CR>:only<CR>
 nnoremap <leader>ga :Gwrite<CR>
@@ -431,4 +416,55 @@ nnoremap <silent><buffer><expr> se defx#do_action('save_session')
 nnoremap <silent><buffer><expr> sl defx#do_action('load_session')
 nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
 nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+'''
+
+[[plugins]]
+# ctrl-w で分割したwindowのリサイズ制御
+repo = 'simeji/winresizer'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+let g:NERDTreeShowBookmarks=1
+autocmd VimEnter * NERDTree
+nnoremap <silent><C-s> :NERDTreeToggle<CR>
+" NERDTrees File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('py',     'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
+call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
+'''
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+[[plugins]]
+repo = 'tyru/vim-altercmd'
+on_event = ['VimEnter']
+hook_source = '''
+" 使うには初期化処理が必要
+call altercmd#load()
+" helpを横分割で右側に開く
+CAlterCommand h[elp] vertical belowright help
+" Denite
+CAlterCommand df Denite file
+CAlterCommand dr Denite file/rec
+" Tabularize
+CAlterCommand arize Tabularize
+" Prettier
+CAlterCommand pr Prettier
+" GundoTree
+CAlterCommand gundo GundoTree
 '''
