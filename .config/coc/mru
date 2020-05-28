@@ -1,3 +1,4 @@
+/Users/satokoki/dotfiles/.config/nvim/dein/dein.toml
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/mock-server/api/post_mypage_login.json
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/components/shard/hooks/LoginHook.js
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/components/desktop/page/Login/index.js
@@ -12,7 +13,6 @@
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/mock-server/scripts/merge_mock_json.js
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/mock-server/db.json
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/mock-server/api/get_users.json
-/Users/satokoki/dotfiles/.config/nvim/dein/dein.toml
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/components/shard/hooks/index.js
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/components/shard/hooks/IdHook.js
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/index.js
