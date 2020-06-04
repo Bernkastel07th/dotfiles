@@ -147,6 +147,9 @@ set whichwrap=b,s,h,l,,[,]
 set list
 set listchars=tab:>.,trail:_,eol:↲,extends:>,precedes:<,nbsp:%
 
+" 新しいウィンドウを右に表示する
+set splitright
+
 " markdownプレビュー
 augroup PrevimSettings
   autocmd!
