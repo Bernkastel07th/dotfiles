@@ -159,7 +159,8 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   //   `hyper-pokemon`
-  plugins: ["hyper-iceberg", "hyper-tab-icons-plus"],
+  //   `hyper-tab-icons-plus`
+  plugins: ["hyper-iceberg"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

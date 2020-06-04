@@ -21,9 +21,6 @@ formulas=(
     openssl
     z
     cask
-    node
-    python3
-    pip
     lua
     markdown
     yarn
@@ -31,10 +28,10 @@ formulas=(
     jq
     ripgrep
     imagemagick
-    asdf
     boost
     tig
     tmux
+    nodenv
 )
 
 "brew tap..."

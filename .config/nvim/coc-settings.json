@@ -1,4 +1,6 @@
 {
+  "https.rejectUnauthorized": false,
+  "http.proxyStrictSSL": false,
   "tsserver.enableJavascript": true,
   "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "suggest.noselect":false,

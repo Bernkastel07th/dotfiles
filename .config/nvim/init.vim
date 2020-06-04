@@ -1,9 +1,10 @@
 " initial settings {{{
+" python provider
+let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
+let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
 
-" pythonのパス指定
-" python2 provider disabled
-let g:loaded_python_provider = 0
-let g:python3_host_prog = expand('~/.asdf/shims/python3')
+" ruby provider
+let g:ruby_host_prog = '/usr/local/bin/neovim-ruby-host'
 
 if !&compatible
   set nocompatible

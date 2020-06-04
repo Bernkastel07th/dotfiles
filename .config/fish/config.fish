@@ -22,11 +22,6 @@ alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 alias blender="/Applications/blender.app/Contents/MacOS/blender"
 
 # --------------------
-# asdf
-# --------------------
-source (brew --prefix asdf)/asdf.fish
-
-# --------------------
 # FZF
 # --------------------
 set -U FZF_LEGACY_KEYBINDINGS 0
@@ -72,3 +67,15 @@ set -g theme_display_cmd_duration no  # コマンド実行時間の非表示
 # --------------------
 set -x PATH /usr/local/opt/icu4c/bin $PATH
 set -U fish_user_paths /usr/local/opt/icu4c/sbin $PATH
+export LANG=ja_JP.UTF-8
+
+# --------------------
+# nodenv
+# --------------------
+eval (nodenv init - | source)
+
+# --------------------
+# pyenv
+# --------------------
+source (pyenv init - | psub)
+
