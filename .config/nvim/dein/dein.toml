@@ -378,6 +378,9 @@ on_cmd = 'Defx'
 depends = ['defx-git', 'defx-icons']
 hook_add = '''
 nnoremap <silent> <Space>f :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr()`<CR>
+" NERDTreeのように左に表示する。現在のファイルの階層を開く。
+" nnoremap <silent> <Space>f :<C-u>Defx -listed -resume -buffer-name=tab`tabpagenr()`<CR>
+nnoremap <silent> <Space>f :<C-u>Defx -split=vertical -winwidth=40 -search=`expand('%:p')` -d
 '''
 hook_source = '''
 function! Root(path) abort
