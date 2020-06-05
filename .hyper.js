@@ -104,14 +104,14 @@ module.exports = {
     //
     // PowerShell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: "",
+    shell: "/usr/local/bin/fish",
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
     // by default `['--login']` will be used
     shellArgs: ["--login"],
 
     // for environment variables
-    env: {},
+    env: { LANG: "ja_JP.UTF-8" },
 
     // set to `false` for no bell
     bell: "SOUND",
