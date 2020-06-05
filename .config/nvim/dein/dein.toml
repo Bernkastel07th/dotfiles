@@ -1,7 +1,4 @@
 [[plugins]]
-repo = 'Shougo/dein.vim'
-
-[[plugins]]
 repo = 'tyru/vim-altercmd'
 on_event = ['VimEnter']
 hook_source = '''
@@ -362,5 +359,6 @@ nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
 [[plugins]]
 repo = 'Shougo/deol.nvim'
 hoook_add = '''
-source ~/.config/nvim/plugins/deol.rc.vim
+nnoremap <silent><C-o> :<C-u>Deol fish -split=floating<CR>
+tnoremap <ESC>   <C-\><C-n>
 '''
