@@ -79,3 +79,7 @@ eval (nodenv init - | source)
 # --------------------
 source (pyenv init - | psub)
 
+# --------------------
+# rbenv
+# --------------------
+source (rbenv init -|psub)
