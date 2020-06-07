@@ -1,7 +1,7 @@
 " initial settings {{{
 " python provider
-let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
-let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
+let g:python_host_prog = '~/.pyenv/versions/neovim-2/bin/python'
+let g:python3_host_prog = '~/.pyenv/versions/neovim-3/bin/python'
 
 " ruby provider
 let g:ruby_host_prog = '/usr/local/bin/neovim-ruby-host'

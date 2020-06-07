@@ -1,3 +1,4 @@
+/Users/satokoki/dotfiles/.config/nvim/init.vim
 /Users/satokoki/.ssh/config
 /Users/satokoki/.ssh/known_hosts
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-frontend/app/src/components/App.js
@@ -126,7 +127,6 @@
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/const/Color.js
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/util/api.js
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/util/index.js
-/Users/satokoki/dotfiles/.config/nvim/init.vim
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/mock-server/scripts/merge_mock_json.js
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/README.md
 /Users/satokoki/WorkSpace/teamlab/megane-tanaka-ninal/src/mock-server/server.js
