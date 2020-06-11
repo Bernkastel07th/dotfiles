@@ -4,7 +4,7 @@ let g:python_host_prog = '~/.pyenv/versions/neovim-2/bin/python'
 let g:python3_host_prog = '~/.pyenv/versions/neovim-3/bin/python'
 
 " ruby provider
-let g:ruby_host_prog = '~/.rbenv/shims/ruby'
+let g:ruby_host_prog = '~/.rbenv/versions/2.7.1/bin/neovim-ruby-host'
 
 if !&compatible
   set nocompatible
