@@ -136,7 +136,11 @@ Sessionx.vim
 .vim/sessions/default.vim
 
 # Fish
+<<<<<<< HEAD
 .config/fish/fish_variables
+=======
+./.config/fish/fish_variables
+>>>>>>> 0ed90fe... feat: add gitignore for fish_valiables
 
 # Temporary
 .netrwhist
