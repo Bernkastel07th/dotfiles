@@ -133,7 +133,8 @@ Sessionx.vim
 .vim/sessions/default.vim
 
 # Fish
-./.config/fish/fish_variables
+.config/fish/fish_variables
+fishd*
 
 # Temporary
 .netrwhist
