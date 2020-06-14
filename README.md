@@ -3,6 +3,7 @@
 release v1.0 🎊
 
 keyword
+- fish shell 🐟
 - tmux
 - neovim
 - DarkPower
