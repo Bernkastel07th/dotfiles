@@ -82,4 +82,4 @@ source (pyenv init - | psub)
 # --------------------
 # rbenv
 # --------------------
-source (rbenv init -|psub)
+source (rbenv init - | psub)

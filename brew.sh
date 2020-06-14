@@ -32,6 +32,7 @@ formulas=(
     tig
     tmux
     nodenv
+    the_silver_searcher
 )
 
 "brew tap..."
