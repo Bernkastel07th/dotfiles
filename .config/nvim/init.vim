@@ -14,10 +14,6 @@ endif
 augroup MyAutoCmd
   autocmd!
 augroup END
-
-" coc-prettierの設定
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
 " dein.vim settings {{{
