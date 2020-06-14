@@ -1,6 +1,6 @@
 # dotfiles
 
-release v1.0 🎊
+release v1.1 🎊
 
 keyword
 - fish shell 🐟
