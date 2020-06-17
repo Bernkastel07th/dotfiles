@@ -33,6 +33,7 @@ formulas=(
     tmux
     nodenv
     the_silver_searcher
+    gibo
 )
 
 "brew tap..."
