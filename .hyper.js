@@ -12,8 +12,7 @@ module.exports = {
     fontSize: 18,
 
     // font family with optional fallbacks
-    fontFamily:
-      'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace, "Ricty Discord for Powerline", Hack Nerd Font',
+    fontFamily: 'Menlo, "Ricty Discord for Powerline", Hack Nerd Font',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: "normal",
