@@ -2,9 +2,17 @@
   "https.rejectUnauthorized": false,
   "http.proxyStrictSSL": false,
   "tsserver.enableJavascript": true,
-  "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx", "vue"],
-  "suggest.noselect":false,
-  "suggest.preferCompleteThanJumpPlaceholder":true,
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "typescript.tsx",
+    "vue"
+  ],
+  "stylelint.filetypes": ["css", "postcss", "sugarss", "vue"],
+  "suggest.noselect": false,
+  "suggest.preferCompleteThanJumpPlaceholder": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
