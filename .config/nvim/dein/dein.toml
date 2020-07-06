@@ -241,10 +241,23 @@ build = 'yarn install'
 # ctrl-w で分割したwindowのリサイズ制御
 repo = 'simeji/winresizer'
 
+# markdown settings {{{
 [[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-build = 'sh -c "cd app & yarn install"'
+# markdown preview
+repo = 'previm/previm'
+
+[[plugins]]
+# make table
+repo = 'mattn/vim-maketable'
+# }}}
+
+[[plugins]]
+# 置換のプレビュー
+repo = 'markonm/traces.vim'
+
+[[plugins]]
+# google翻訳
+repo = 'skanehira/translate.vim'
 
 #########################################
 #### DarkPower plugins ##################

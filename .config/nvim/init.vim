@@ -17,39 +17,54 @@ if &compatible
   set nocompatible
 endif
 
-let s:dein_dir = expand('$HOME/.cache/dein')
+let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
+" dein installation check {{{
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . s:dein_repo_dir
+endif
+" }}}
 
-" 設定開始
+" begin settings {{{
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
+  " .toml files
+  let s:rc_dir    = expand('~/.config/nvim')
+  if !isdirectory(s:rc_dir)
+    call mkdir(s:rc_dir, 'p')
+  endif
+  let s:toml      = s:rc_dir . '/dein/dein.toml'
+  let s:lazy_toml = s:rc_dir . '/dein/dein_lazy.toml'
 
-  " プラグインリストを収めた TOML ファイル
-  " 予め TOML ファイル(後述)を用意しておく
-  let g:rc_dir    = expand('~/.config/nvim/dein')
-  let s:toml      = g:rc_dir . '/dein.toml'
-  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
-
-  " TOML を読み込み、キャッシュしておく
+  " read toml and cache
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-  " 設定終了
+  " end settings
   call dein#end()
   call dein#save_state()
 endif
+" }}}
 
-" もし、未インストールものものがあったらインストール
+" plugin installation check {{{
 if dein#check_install()
   call dein#install()
 endif
+" }}}
 
-filetype plugin indent on
-syntax enable
+" plugin remove check {{{
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
+" }}}
+
 " }}}
 
 " editor settings {{{
