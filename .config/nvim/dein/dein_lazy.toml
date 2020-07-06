@@ -12,11 +12,6 @@ repo = 'kawaz/shellcheck.vim'
 on_ft = ['sh']
 
 [[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-build = 'sh -c "cd app & yarn install"'
-
-[[plugins]]
 repo     = 'prettier/vim-prettier'
 build    = 'npm install'
 on_ft    = ['javascript', 'typescript', 'vue', 'css', 'scss', 'json', 'markdown']

@@ -6,10 +6,6 @@ let g:python3_host_prog = '~/.pyenv/versions/neovim-3/bin/python'
 " ruby provider
 let g:ruby_host_prog = '~/.rbenv/versions/2.7.1/bin/neovim-ruby-host'
 
-if !&compatible
-  set nocompatible
-endif
-
 " reset augroup
 augroup MyAutoCmd
   autocmd!
@@ -17,20 +13,20 @@ augroup END
 " }}}
 
 " dein.vim settings {{{
-let s:dein_dir = expand('~/.cache/dein') " プラグインが実際にインストールされるディレクトリ
+if &compatible
+  set nocompatible
+endif
+
+let s:dein_dir = expand('$HOME/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" dein.vim がなければ github から落としてくる
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-endif
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " 設定開始
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
+
+  call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイル(後述)を用意しておく
@@ -51,7 +47,10 @@ endif
 if dein#check_install()
   call dein#install()
 endif
-" }}} initial settings end
+
+filetype plugin indent on
+syntax enable
+" }}}
 
 " editor settings {{{
 " シンタックスハイライトをオンにする
@@ -146,12 +145,6 @@ set listchars=tab:>.,trail:_,eol:↲,extends:>,precedes:<,nbsp:%
 " 新しいウィンドウを右に表示する
 set splitright
 
-" markdownプレビュー
-augroup PrevimSettings
-  autocmd!
-  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END
-
 " 検索
 autocmd QuickFixCmdPost *grep* cwindow
 
@@ -170,8 +163,9 @@ if has("autocmd")
   \   exe "normal! g'\"" |
   \ endif
 endif
+" }}}
 
-" 全角スペースの可視化
+" 全角スペースの可視化 {{{
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=red gui=reverse guibg=red
 endfunction
@@ -184,6 +178,7 @@ if has('syntax')
   augroup END
   call ZenkakuSpace()
 endif
+" }}}
 
 " tab settings {{{
 " Anywhere SID.
@@ -192,7 +187,7 @@ function! s:SID_PREFIX()
 endfunction
 
 " Set tabline.
-function! s:my_tabline()  "{{{
+function! s:my_tabline()
   let s = ''
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
@@ -209,7 +204,8 @@ function! s:my_tabline()  "{{{
   endfor
   let s .= '%#TabLineFill#%T%=%#TabLine#'
   return s
-endfunction "}}}
+endfunction
+
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " 常にタブラインを表示
 
@@ -234,8 +230,7 @@ map <silent> [Tag]f :tabfirst<CR>
 " tf 最初のタブ
 map <silent> [Tag]l :tablast<CR>
 " tl 最後のタブ
-" }}} tag settings end
-" }}} editor settings end
+" }}}
 
 " keymap settings {{{
 " :vimgrep
@@ -255,4 +250,4 @@ if has('nvim')
   tnoremap <C-l> <C-\><C-n>gt
   tnoremap <C-h> <C-\><C-n>gT
 endif
-" }}} keymap settings end
+" }}}
