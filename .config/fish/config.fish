@@ -11,7 +11,7 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 # --------------------
 # TrueColor
 # --------------------
-set -g TERM xterm-256color
+set -g TERM screen-256color
 
 # --------------------
 # alias
