@@ -1,5 +1,4 @@
 {
-  "https.rejectUnauthorized": false,
   "http.proxyStrictSSL": false,
   "tsserver.enableJavascript": true,
   "eslint.filetypes": [
@@ -10,7 +9,7 @@
     "typescript.tsx",
     "vue"
   ],
-  "stylelint.filetypes": ["css", "postcss", "sugarss", "vue"],
+  "stylelint.filetypes": ["css", "postcss", "sugarss"],
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
   "languageserver": {
