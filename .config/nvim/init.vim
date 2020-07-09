@@ -6,6 +6,10 @@ let g:python3_host_prog = '~/.pyenv/versions/neovim-3/bin/python'
 " ruby provider
 let g:ruby_host_prog = '~/.rbenv/versions/2.7.1/bin/neovim-ruby-host'
 
+if !&compatible
+  set nocompatible
+endif
+
 " reset augroup
 augroup MyAutoCmd
   autocmd!
@@ -13,58 +17,40 @@ augroup END
 " }}}
 
 " dein.vim settings {{{
-if &compatible
-  set nocompatible
-endif
-
-let s:dein_dir = expand('~/.cache/dein')
+let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
+let s:dein_dir = s:cache_home . '/dein'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
-" dein installation check {{{
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  execute 'set runtimepath^=' . s:dein_repo_dir
+if !isdirectory(s:dein_repo_dir)
+  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
 endif
-" }}}
+let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
-" begin settings {{{
+" .toml files
+let s:rc_dir    = expand('~/.config/nvim')
+let s:toml      = s:rc_dir . '/dein/dein.toml'
+let s:lazy_toml = s:rc_dir . '/dein/dein_lazy.toml'
+
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
-
-  " .toml files
-  let s:rc_dir    = expand('~/.config/nvim')
-  if !isdirectory(s:rc_dir)
-    call mkdir(s:rc_dir, 'p')
-  endif
-  let s:toml      = s:rc_dir . '/dein/dein.toml'
-  let s:lazy_toml = s:rc_dir . '/dein/dein_lazy.toml'
-
   " read toml and cache
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
   " end settings
   call dein#end()
   call dein#save_state()
 endif
-" }}}
 
-" plugin installation check {{{
-if dein#check_install()
+" plugin installation check
+if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
-" }}}
 
-" plugin remove check {{{
+" plugin remove check
 let s:removed_plugins = dein#check_clean()
 if len(s:removed_plugins) > 0
   call map(s:removed_plugins, "delete(v:val, 'rf')")
   call dein#recache_runtimepath()
 endif
-" }}}
-
 " }}}
 
 " editor settings {{{
