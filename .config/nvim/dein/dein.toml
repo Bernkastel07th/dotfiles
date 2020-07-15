@@ -41,18 +41,23 @@ let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
 '''
 
-[[plugins]]
+# coc.nvimのシンタックスハイライトと競合する
 # カーソル位置のコンテキストに合わせてftを切り替える
-repo = 'osyo-manga/vim-precious'
-depends = ['context_filetype.vim']
-hook_add = '''
-" NORMALモードのカーソル移動中に頻繁に切り替わるとうざいのでデフォは無効化しておく(helpは例外)
-" let g:precious_enable_switch_CursorMoved = { '*': 0, 'help': 1 }
-
-" INSERTモードのON/OFFに合わせてトグル
-" autocmd  InsertEnter * :PreciousSwitch
-" autocmd  InsertLeave * :PreciousRese
-'''
+# ft_plugins {{{
+#[[plugins]]
+#repo = 'Shougo/context_filetype.vim'
+#[[plugins]]
+#repo = 'osyo-manga/vim-precious'
+#depends = ['context_filetype.vim']
+#hook_add = '''
+#" NORMALモードのカーソル移動中に頻繁に切り替わるとうざいのでデフォは無効化しておく(helpは例外)
+#let g:precious_enable_switch_CursorMoved = { '*': 0, 'help': 1 }
+#
+#" INSERTモードのON/OFFに合わせてトグル
+#autocmd  InsertEnter * :PreciousSwitch
+#autocmd  InsertLeave * :PreciousRese
+#'''
+# }}}
 
 [[plugins]]
 # 行番号の左側にdiffの+-とかが表示されるようにする、[c と ]c で前後のHunkに移動できる。
@@ -175,10 +180,6 @@ endfunction
 repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
-# スコープごとにタグをウィンドウに表示するVimプラグイン
-repo = 'majutsushi/tagbar'
-
-[[plugins]]
 # ツリー状のundo履歴をブラウズする :GundoTree
 repo = 'sjl/gundo.vim'
 
@@ -201,13 +202,6 @@ repo = 'qpkorr/vim-renamer'
 [[plugins]]
 # 全角と半角の空白文字を可視化
 repo = 'bronson/vim-trailing-whitespace'
-
-[[plugins]]
-# :Tabularize /, とかでアライン整形（使い方メモ http://teotr.github.io/blog/2011/04/15/tabular/
-repo = 'godlygeek/tabular'
-
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
 # g> g< gs で引数の位置交換を簡単に行う
@@ -259,6 +253,13 @@ repo = 'markonm/traces.vim'
 # google翻訳
 repo = 'skanehira/translate.vim'
 
+[[plugins]]
+# brackets pair colorizer
+repo = 'luochen1990/rainbow'
+hook_add = '''
+let g:rainbow_active = 1
+'''
+
 #########################################
 #### DarkPower plugins ##################
 #########################################
@@ -268,10 +269,6 @@ hook_add = '''
 nnoremap <silent> <Space>s : <C-u> Deol fish -split=floating <CR>
 tnoremap <ESC> <C-\><C-n>
 '''
-
-[[plugins]]
-# カーソル位置のコンテキストのftを判定するライブラリ
-repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
