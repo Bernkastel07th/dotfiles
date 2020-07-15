@@ -3,7 +3,7 @@
 repo = 'rhysd/github-complete.vim'
 on_i = 1
 
-[[plugins]] # toml syntax
+[[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
 
@@ -24,3 +24,17 @@ hook_source = '''
 
   autocmd BufWritePre *.js,*.ts,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
 '''
+
+# markdown settings {{{
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+
+[[plugins]]
+repo = 'previm/previm'
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+# }}}

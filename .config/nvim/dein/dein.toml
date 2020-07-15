@@ -235,16 +235,6 @@ build = 'yarn install'
 # ctrl-w で分割したwindowのリサイズ制御
 repo = 'simeji/winresizer'
 
-# markdown settings {{{
-[[plugins]]
-# markdown preview
-repo = 'previm/previm'
-
-[[plugins]]
-# make table
-repo = 'mattn/vim-maketable'
-# }}}
-
 [[plugins]]
 # 置換のプレビュー
 repo = 'markonm/traces.vim'
