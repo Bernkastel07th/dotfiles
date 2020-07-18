@@ -41,24 +41,6 @@ let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
 '''
 
-# coc.nvimのシンタックスハイライトと競合する
-# カーソル位置のコンテキストに合わせてftを切り替える
-# ft_plugins {{{
-#[[plugins]]
-#repo = 'Shougo/context_filetype.vim'
-#[[plugins]]
-#repo = 'osyo-manga/vim-precious'
-#depends = ['context_filetype.vim']
-#hook_add = '''
-#" NORMALモードのカーソル移動中に頻繁に切り替わるとうざいのでデフォは無効化しておく(helpは例外)
-#let g:precious_enable_switch_CursorMoved = { '*': 0, 'help': 1 }
-#
-#" INSERTモードのON/OFFに合わせてトグル
-#autocmd  InsertEnter * :PreciousSwitch
-#autocmd  InsertLeave * :PreciousRese
-#'''
-# }}}
-
 [[plugins]]
 # 行番号の左側にdiffの+-とかが表示されるようにする、[c と ]c で前後のHunkに移動できる。
 repo = 'airblade/vim-gitgutter'
@@ -208,10 +190,18 @@ repo = 'bronson/vim-trailing-whitespace'
 repo = 'machakann/vim-swap'
 
 [[plugins]]
-repo = 'Yggdroot/indentLine'
+repo = 'nathanaelkane/vim-indent-guides'
 hook_add = '''
-let g:indentLine_faster = 1
-nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = ['help', 'defx']
+" preset color
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=black ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=4
+" preset size default: 0
+" let g:indent_guides_guide_size = 1
+" preset level default: 1
+let g:indent_guides_start_level = 2
 '''
 
 [[plugins]]
@@ -221,10 +211,10 @@ let g:vim_json_syntax_conceal = 0
 '''
 
 [[plugins]]
-# 単語上で K でftに対応したdevdocs検索が出来るようにする http://bit.ly/1sbXZnf
-repo = 'rhysd/devdocs.vim'
+repo = 'rizzatti/dash.vim'
 hook_add = '''
-autocmd FileType c,cpp,rust,haskell,python,go,javascript,ruby,php nmap <buffer>K <Plug>(devdocs-under-cursor)
+nmap <silent> <leader>d <Plug>DashSearch
+nmap <silent> <leader>D <Plug>DashGlobalSearch
 '''
 
 [[plugins]]
