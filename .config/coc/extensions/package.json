@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "coc-css": ">=1.2.3",
+    "coc-css": ">=1.2.4",
     "coc-eslint": ">=1.2.7",
     "coc-highlight": ">=1.2.5",
     "coc-html": ">=1.2.4",
     "coc-json": ">=1.2.6",
     "coc-lists": ">=1.3.8",
-    "coc-prettier": ">=1.1.14",
+    "coc-prettier": ">=1.1.17",
     "coc-python": ">=1.2.12",
     "coc-stylelint": ">=1.1.0",
-    "coc-tsserver": ">=1.5.1",
-    "coc-vetur": ">=1.1.10"
+    "coc-tsserver": ">=1.5.2",
+    "coc-vetur": ">=1.1.11"
   }
 }
