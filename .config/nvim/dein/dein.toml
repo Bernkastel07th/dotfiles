@@ -230,10 +230,6 @@ repo = 'simeji/winresizer'
 repo = 'markonm/traces.vim'
 
 [[plugins]]
-# google翻訳
-repo = 'skanehira/translate.vim'
-
-[[plugins]]
 # brackets pair colorizer
 repo = 'luochen1990/rainbow'
 hook_add = '''
