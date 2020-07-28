@@ -164,6 +164,15 @@ if has("autocmd")
   \   exe "normal! g'\"" |
   \ endif
 endif
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 " }}}
 
 " 全角スペースの可視化 {{{
