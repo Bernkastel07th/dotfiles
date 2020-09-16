@@ -474,12 +474,12 @@ call defx#custom#column('mark', {
   \ 'selected_icon': '✓',
   \ })
 call defx#custom#option('_', {
-  \ 'winwidth': 40,
+  \ 'winwidth': 25,
   \ 'split': 'vertical',
   \ 'direction': 'topleft',
   \ 'buffer_name': 'explorer',
   \ 'toggle': 1,
-  \ 'resume': 1,
+  \ 'resume': 0,
   \ 'columns': 'indent:git:icons:filename:mark',
   \ 'show_ignored_files': 1,
   \ })
