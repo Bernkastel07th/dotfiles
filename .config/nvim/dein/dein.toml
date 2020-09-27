@@ -338,6 +338,10 @@ hook_add = '''
 let g:rainbow_active = 1
 '''
 
+[[plugins]]
+# tidalcycles
+repo = 'tidalcycles/vim-tidal'
+
 #########################################
 #### DarkPower plugins ##################
 #########################################

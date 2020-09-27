@@ -43,7 +43,7 @@ module.exports = {
 
     // terminal background color
     // opacity is only supported on macOS
-    backgroundColor: "rgba(0,0,0,0.99)",
+    backgroundColor: "rgba(0,0,0,0.9)",
 
     // terminal selection color
     selectionColor: "rgba(248,28,229,0.3)",
@@ -149,17 +149,35 @@ module.exports = {
     //  unibody: "true",
     //  avatar: "true"
     //}
+
+    // hyper-blend
+    //hyperBlend: {
+    //  terminal: {
+    //    opacity: 0.8,
+    //    color: "#000",
+    //    colorOpacity: 1
+    //  },
+    //  background: {
+    //    // set background-image
+    //    folder: "",
+    //    position: "center",
+    //    size: "cover",
+    //    repeat: "no-repeat"
+    //  }
+    //}
   },
 
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
   // examples:
-  //   `hyperpower`
-  //   `@company/project`
-  //   `project#1.0.1`
-  //   `hyper-pokemon`
-  //   `hyper-tab-icons-plus`
-  plugins: ["hyper-iceberg"],
+  //   hyperpower
+  //   @company/project
+  //   project#1.0.1
+  //   hyper-pokemon
+  //   hyper-tab-icons-plus
+  //   hyper-iceberg
+  //   hyper-blend
+  plugins: ["hyper-dracula", "hyper-confirm", "hypercwd", "hyper-tab-icons"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
