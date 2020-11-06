@@ -75,6 +75,9 @@ source (pyenv init - | psub)
 # rbenv
 # --------------------
 source (rbenv init - | psub)
+
+# --------------------
 # ghcup-env
+# --------------------
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 test -f /Users/satokoki/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /Users/satokoki/.ghcup/bin $PATH

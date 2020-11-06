@@ -324,10 +324,6 @@ repo = 'shuntaka9576/preview-swagger.nvim'
 build = 'yarn install'
 
 [[plugins]]
-# ctrl-w で分割したwindowのリサイズ制御
-repo = 'simeji/winresizer'
-
-[[plugins]]
 # 置換のプレビュー
 repo = 'markonm/traces.vim'
 
@@ -336,6 +332,13 @@ repo = 'markonm/traces.vim'
 repo = 'luochen1990/rainbow'
 hook_add = '''
 let g:rainbow_active = 1
+'''
+
+[[plugins]]
+# tidalcycles
+repo = 'tidalcycles/vim-tidal'
+hook_add = '''
+let g:tidal_target = "terminal"
 '''
 
 #########################################
