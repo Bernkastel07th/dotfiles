@@ -110,7 +110,10 @@ module.exports = {
     shellArgs: ["--login"],
 
     // for environment variables
-    env: { LANG: "ja_JP.UTF-8" },
+    env: { 
+      LANG: "ja_JP.UTF-8",
+      LC_ALL: "ja_JP.UTF-8"
+    },
 
     // set to `false` for no bell
     bell: "SOUND",
