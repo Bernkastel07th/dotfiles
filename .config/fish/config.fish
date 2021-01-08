@@ -1,3 +1,4 @@
+export LANG=ja_JP.UTF-8
 # --------------------
 # git
 # --------------------
@@ -81,3 +82,11 @@ source (rbenv init - | psub)
 # --------------------
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 test -f /Users/satokoki/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /Users/satokoki/.ghcup/bin $PATH
+
+# --------------------
+# powerline
+# --------------------
+function fish_prompt
+  powerline-shell --shell bare $status
+end
+

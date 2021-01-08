@@ -1,11 +1,4 @@
 " initial settings {{{
-" python provider
-let g:python_host_prog = '~/.pyenv/versions/neovim-2/bin/python'
-let g:python3_host_prog = '~/.pyenv/versions/neovim-3/bin/python'
-
-" ruby provider
-let g:ruby_host_prog = '~/.rbenv/versions/2.7.1/bin/neovim-ruby-host'
-
 if !&compatible
   set nocompatible
 endif
@@ -15,6 +8,12 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 " }}}
+
+" for only neovim. in pyenv virtualenv named 'nvim-python3'
+if has('nvim') && isdirectory( $PYENV_ROOT."/versions/neovim3" )
+  let g:python_host_prog = $PYENV_ROOT.'/versions/neovim2/bin/python'
+  let g:python3_host_prog = $PYENV_ROOT.'/versions/neovim3/bin/python'
+endif
 
 " dein.vim settings {{{
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
