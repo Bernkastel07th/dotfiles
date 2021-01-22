@@ -14,7 +14,7 @@ on_ft = ['sh']
 [[plugins]]
 repo     = 'prettier/vim-prettier'
 build    = 'npm install'
-on_ft    = ['javascript', 'typescript', 'vue', 'css', 'scss', 'json', 'markdown']
+on_ft    = ['javascript', 'typescript', 'vue', 'css', 'scss', 'json', 'markdown', 'pug']
 hook_source = '''
   " @formatアノテーションを持ったファイルの自動フォーマットを無効にする
   let g:prettier#autoformat = 0
@@ -28,6 +28,7 @@ hook_source = '''
 # markdown settings {{{
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown']
 
 [[plugins]]
 repo = 'previm/previm'
@@ -37,7 +38,20 @@ let g:previm_open_cmd = 'open -a Google\ Chrome'
 " リアルタイムにプレビューする
 let g:previm_enable_realtime = 2
 '''
+on_ft = ['markdown']
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
+on_ft = ['markdown']
 # }}}
+
+[[plugins]]
+repo = 'elzr/vim-json'
+hook_add = '''
+  let g:vim_json_syntax_conceal = 0
+'''
+on_ft = ['json']
+
+[[plugins]]
+repo = 'digitaltoad/vim-pug'
+on_ft = ['pug']

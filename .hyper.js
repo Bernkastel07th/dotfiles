@@ -12,7 +12,7 @@ module.exports = {
     fontSize: 18,
 
     // font family with optional fallbacks
-    fontFamily: 'Menlo, "Ricty Discord for Powerline", Hack Nerd Font',
+    fontFamily: 'Menlo, Ricty Discord for Powerline, Hack Nerd Font',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: "normal",
@@ -103,6 +103,7 @@ module.exports = {
     //
     // PowerShell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
+
     shell: "/usr/local/bin/fish",
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
@@ -110,7 +111,7 @@ module.exports = {
     shellArgs: ["--login"],
 
     // for environment variables
-    env: { 
+    env: {
       LANG: "ja_JP.UTF-8",
       LC_ALL: "ja_JP.UTF-8"
     },

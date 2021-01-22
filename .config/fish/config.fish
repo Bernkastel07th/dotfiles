@@ -1,4 +1,5 @@
 export LANG=ja_JP.UTF-8
+set -gx LOGIN_SHELL "/usr/local/bin/fish"
 # --------------------
 # git
 # --------------------
@@ -8,6 +9,7 @@ set -x PATH /usr/local/opt/git/bin $PATH
 # Neovim
 # --------------------
 set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx PYENV_ROOT "$HOME/.pyenv"
 
 # --------------------
 # TrueColor

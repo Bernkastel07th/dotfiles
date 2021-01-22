@@ -307,12 +307,6 @@ let g:indent_guides_start_level = 2
 '''
 
 [[plugins]]
-repo = 'elzr/vim-json'
-hook_add = '''
-let g:vim_json_syntax_conceal = 0
-'''
-
-[[plugins]]
 repo = 'rizzatti/dash.vim'
 hook_add = '''
 nmap <silent> <leader>d <Plug>DashSearch
@@ -347,7 +341,7 @@ let g:tidal_target = "terminal"
 [[plugins]]
 repo = 'Shougo/deol.nvim'
 hook_add = '''
-nnoremap <silent> <Space>s : <C-u> Deol fish -split=floating <CR>
+nnoremap <silent> <Space>s : <C-u> Deol fish -split=floating -winwidth=100 -winheight=50<CR>
 tnoremap <ESC> <C-\><C-n>
 '''
 
