@@ -19,6 +19,7 @@
   ph = push origin HEAD
   pr = pull --rebase origin
   f = fetch
+  ru = remote update -p
 [credential]
 	helper = osxkeychain
 [filter "lfs"]

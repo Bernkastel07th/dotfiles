@@ -4,6 +4,7 @@
       "libs": {
         "/Users/satoukouki/WorkSpaces/coralreef-app/node_modules/eslint/lib/api.js": true
       }
-    }
+    },
+    "eslintAlwaysAllowExecution": true
   }
 }

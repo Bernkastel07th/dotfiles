@@ -17,6 +17,9 @@ endfunction
 '''
 
 [[plugins]]
+repo = 'simeji/winresizer'
+
+[[plugins]]
 repo = 'dense-analysis/ale'
 hook_add = '''
 let g:ale_statusline_format = ['E%d', 'W%d', 'OK']
