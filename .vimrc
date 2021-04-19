@@ -1,17 +1,3 @@
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd ColorScheme * call ZenkakuSpace()
-    autocmd VimEnter,WinEnter
-  augroup END
-
-  augroup spell_check
-    autocmd!
-    autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
-  augroup END
-endif
-
-" editor settings {{{
 " シンタックスハイライトをオンにする
 packadd! dracula
 syntax enable
@@ -132,31 +118,6 @@ set signcolumn=yes
 
 " spell check
 set spelllang=en,cjk
-" }}}
-
-" spell check 日本語は除外する
-fun! s:SpellConf()
-  redir! => syntax
-  silent syntax
-  redir END
-
-  set spell
-
-  if syntax =~? '/<comment\>'
-    syntax spell default
-    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent containedin=Comment contained
-  else
-    syntax spell toplevel
-    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent
-  endif
-
-  syntax cluster Spell add=SpellNotAscii,SpellMaybeCode
-endfunc
-
-" 全角スペースの可視化
-" function! ZenkakuSpace()
-"     highlight ZenkakuSpace cterm=reverse ctermfg=red gui=reverse guibg=red
-" endfunction
 
 " tab settings {{{
 " Anywhere SID.
