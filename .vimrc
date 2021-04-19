@@ -1,3 +1,16 @@
+if has('syntax')
+  augroup ZenkakuSpace
+    autocmd!
+    autocmd ColorScheme * call ZenkakuSpace()
+    autocmd VimEnter,WinEnter
+  augroup END
+
+  augroup spell_check
+    autocmd!
+    autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
+  augroup END
+endif
+
 " editor settings {{{
 " シンタックスハイライトをオンにする
 packadd! dracula
@@ -121,8 +134,7 @@ set signcolumn=yes
 set spelllang=en,cjk
 " }}}
 
-" spell check {{{
-" 日本語は除外する
+" spell check 日本語は除外する
 fun! s:SpellConf()
   redir! => syntax
   silent syntax
@@ -141,26 +153,10 @@ fun! s:SpellConf()
   syntax cluster Spell add=SpellNotAscii,SpellMaybeCode
 endfunc
 
-augroup spell_check
-  autocmd!
-  autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
-augroup END
-" }}}
-
-" 全角スペースの可視化 {{{
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=red gui=reverse guibg=red
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-      autocmd!
-      autocmd ColorScheme * call ZenkakuSpace()
-      autocmd VimEnter,WinEnter
-  augroup END
-  call ZenkakuSpace()
-endif
-" }}}
+" 全角スペースの可視化
+" function! ZenkakuSpace()
+"     highlight ZenkakuSpace cterm=reverse ctermfg=red gui=reverse guibg=red
+" endfunction
 
 " tab settings {{{
 " Anywhere SID.
@@ -214,22 +210,8 @@ map <silent> [Tag]f :tabfirst<CR>
 map <silent> [Tag]l :tablast<CR>
 " }}}
 
-" keymap settings {{{
 " :vimgrep
 nnoremap [q :cprevious<CR>   " 前へ
 nnoremap ]q :cnext<CR>       " 次へ
 nnoremap [Q :<C-u>cfirst<CR> " 最初へ
 nnoremap ]Q :<C-u>clast<CR>  " 最後へ
-" neovim terminal mapping
-if has('nvim')
-  " 新しいタブでターミナルを起動
-  nnoremap @t :tabe<CR>:terminal<CR>
-  " Ctrl + q でターミナルを終了
-  tnoremap <C-q> <C-\><C-n>:q<CR>
-  " ESCでターミナルモードからノーマルモードへ
-  tnoremap <ESC> <C-\><C-n>
-  " ターミナルモードでのタブ移動
-  tnoremap <C-l> <C-\><C-n>gt
-  tnoremap <C-h> <C-\><C-n>gT
-endif
-" }}}

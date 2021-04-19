@@ -1,13 +1,11 @@
-" initial settings {{{
-if !&compatible
+if &compatible
   set nocompatible
 endif
 
-" reset augroup
+" reset MyAutoCmd
 augroup MyAutoCmd
   autocmd!
 augroup END
-" }}}
 
 " provider
 let g:python_host_prog = '/usr/bin/python2'
@@ -15,26 +13,28 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 let g:ruby_host_prog = $NEOVIM_RUBY_HOST
 let g:node_host_prog = $HOME . '/.nodenv/versions/14.16.1/bin/neovim-node-host'
 
-" dein.vim settings {{{
+" dein_setting {{{
 let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
 let s:dein_dir = s:cache_home . '/dein'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-if !isdirectory(s:dein_repo_dir)
-  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
-endif
-let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
-" .toml files
-let s:rc_dir    = expand('~/.config/nvim')
-let s:toml      = s:rc_dir . '/dein/dein.toml'
-let s:lazy_toml = s:rc_dir . '/dein/dein_lazy.toml'
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+  endif
+  execute 'set runtimepath^=' . s:dein_repo_dir
+endif
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
+
+  let s:rc_dir    = expand('~/.config/nvim')
+  let s:toml      = s:rc_dir . '/dein/dein.toml'
+  let s:lazy_toml = s:rc_dir . '/dein/dein_lazy.toml'
   " read toml and cache
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
-  " end settings
+
   call dein#end()
   call dein#save_state()
 endif
@@ -42,7 +42,7 @@ endif
 filetype plugin indent on
 
 " plugin installation check
-if has('vim_starting') && dein#check_install()
+if dein#check_install()
   call dein#install()
 endif
 
@@ -54,10 +54,9 @@ if len(s:removed_plugins) > 0
 endif
 " }}}
 
-" editor settings {{{
-" シンタックスハイライトをオンにする
-syntax on
+syntax enable
 set t_Co=256
+
 " to enable setting true color
 set termguicolors
 " $TERMがxterm以外のときは以下を設定する必要がある。
@@ -66,8 +65,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
 set background=dark
 
 " 補完などに使われるポップアップメニューを半透明化
-" 0 <= pumblend <= 100
-set pumblend=10
+set pumblend=10 " 0 <= pumblend <= 100
 
 " guifontを設定しないと文字化けになる。terminalで行ったフォントの設定と同様
 " 公式サイトではLinuxとmacOSの設定が若干異なるが、Linuxの設定でもmacOSで問題なし
@@ -177,48 +175,6 @@ set signcolumn=yes
 
 " spell check
 set spelllang=en,cjk
-" }}}
-
-" spell check {{{
-" 日本語は除外する
-fun! s:SpellConf()
-  redir! => syntax
-  silent syntax
-  redir END
-
-  set spell
-
-  if syntax =~? '/<comment\>'
-    syntax spell default
-    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent containedin=Comment contained
-  else
-    syntax spell toplevel
-    syntax match SpellMaybeCode /\<\h\l*[_A-Z]\h\{-}\>/ contains=@NoSpell transparent
-  endif
-
-  syntax cluster Spell add=SpellNotAscii,SpellMaybeCode
-endfunc
-
-augroup spell_check
-  autocmd!
-  autocmd BufReadPost,BufNewFile,Syntax * call s:SpellConf()
-augroup END
-" }}}
-
-" 全角スペースの可視化 {{{
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=red gui=reverse guibg=red
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-      autocmd!
-      autocmd ColorScheme * call ZenkakuSpace()
-      autocmd VimEnter,WinEnter
-  augroup END
-  call ZenkakuSpace()
-endif
-" }}}
 
 " tab settings {{{
 " Anywhere SID.
@@ -272,22 +228,18 @@ map <silent> [Tag]f :tabfirst<CR>
 map <silent> [Tag]l :tablast<CR>
 " }}}
 
-" keymap settings {{{
 " :vimgrep
 nnoremap [q :cprevious<CR>   " 前へ
 nnoremap ]q :cnext<CR>       " 次へ
 nnoremap [Q :<C-u>cfirst<CR> " 最初へ
 nnoremap ]Q :<C-u>clast<CR>  " 最後へ
 " neovim terminal mapping
-if has('nvim')
-  " 新しいタブでターミナルを起動
-  nnoremap @t :tabe<CR>:terminal<CR>
-  " Ctrl + q でターミナルを終了
-  tnoremap <C-q> <C-\><C-n>:q<CR>
-  " ESCでターミナルモードからノーマルモードへ
-  tnoremap <ESC> <C-\><C-n>
-  " ターミナルモードでのタブ移動
-  tnoremap <C-l> <C-\><C-n>gt
-  tnoremap <C-h> <C-\><C-n>gT
-endif
-" }}}
+" 新しいタブでターミナルを起動
+nnoremap @t :tabe<CR>:terminal<CR>
+" Ctrl + q でターミナルを終了
+tnoremap <C-q> <C-\><C-n>:q<CR>
+" ESCでターミナルモードからノーマルモードへ
+tnoremap <ESC> <C-\><C-n>
+" ターミナルモードでのタブ移動
+tnoremap <C-l> <C-\><C-n>gt
+tnoremap <C-h> <C-\><C-n>gT
