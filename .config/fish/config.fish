@@ -1,15 +1,19 @@
 export LANG=ja_JP.UTF-8
-set -gx LOGIN_SHELL "/usr/local/bin/fish"
+
+# --------------------
+# bin
+# --------------------
+set -g PATH /usr/local/bin $PATH
+
 # --------------------
 # git
 # --------------------
-set -x PATH /usr/local/opt/git/bin $PATH
+set -g PATH /usr/local/opt/git/bin $PATH
 
 # --------------------
 # Neovim
 # --------------------
 set -gx XDG_CONFIG_HOME "$HOME/.config"
-set -gx PYENV_ROOT "$HOME/.pyenv"
 
 # --------------------
 # TrueColor
@@ -19,8 +23,8 @@ set -g TERM screen-256color
 # --------------------
 # FZF
 # --------------------
-set -U FZF_LEGACY_KEYBINDINGS 0
-set -U FZF_REVERSE_ISEARCH_OPTS "--reverse --height=100%"
+set -g FZF_LEGACY_KEYBINDINGS 0
+set -g FZF_REVERSE_ISEARCH_OPTS "--reverse --height=100%"
 
 # --------------------
 # peco
@@ -58,11 +62,12 @@ set -g theme_display_date no  # 時刻を表示しないように設定
 set -g theme_display_cmd_duration no  # コマンド実行時間の非表示
 
 # --------------------
-# node-canvas
+# ghcup-env
 # --------------------
-set -x PATH /usr/local/opt/icu4c/bin $PATH
-set -U fish_user_paths /usr/local/opt/icu4c/sbin $PATH
-export LANG=ja_JP.UTF-8
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+test -f /Users/satokoki/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /Users/satokoki/.ghcup/bin $PATH
+set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
+set -g fish_user_paths "/usr/local/opt/sqlite/bin" $fish_user_paths
 
 # --------------------
 # nodenv
@@ -70,14 +75,6 @@ export LANG=ja_JP.UTF-8
 eval (nodenv init - | source)
 
 # --------------------
-# ghcup-env
+# rbenv
 # --------------------
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-test -f /Users/satokoki/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /Users/satokoki/.ghcup/bin $PATH
-
-# --------------------
-# powerline
-# --------------------
-function fish_prompt
-  powerline-shell --shell bare $status
-end
+eval (rbenv init - | source)

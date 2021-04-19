@@ -1,62 +1,8 @@
-" initial settings {{{
-if !&compatible
-  set nocompatible
-endif
-
-" reset augroup
-augroup MyAutoCmd
-  autocmd!
-augroup END
-" }}}
-
-" provider
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:ruby_host_prog = $NEOVIM_RUBY_HOST
-let g:node_host_prog = $HOME . '/.nodenv/versions/14.16.1/bin/neovim-node-host'
-
-" dein.vim settings {{{
-let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
-let s:dein_dir = s:cache_home . '/dein'
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-if !isdirectory(s:dein_repo_dir)
-  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
-endif
-let &runtimepath = s:dein_repo_dir .",". &runtimepath
-
-" .toml files
-let s:rc_dir    = expand('~/.config/nvim')
-let s:toml      = s:rc_dir . '/dein/dein.toml'
-let s:lazy_toml = s:rc_dir . '/dein/dein_lazy.toml'
-
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-  " read toml and cache
-  call dein#load_toml(s:toml, {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-  " end settings
-  call dein#end()
-  call dein#save_state()
-endif
-
-filetype plugin indent on
-
-" plugin installation check
-if has('vim_starting') && dein#check_install()
-  call dein#install()
-endif
-
-" plugin remove check
-let s:removed_plugins = dein#check_clean()
-if len(s:removed_plugins) > 0
-  call map(s:removed_plugins, "delete(v:val, 'rf')")
-  call dein#recache_runtimepath()
-endif
-" }}}
-
 " editor settings {{{
 " シンタックスハイライトをオンにする
-syntax on
+packadd! dracula
+syntax enable
+colorscheme dracula
 set t_Co=256
 " to enable setting true color
 set termguicolors
@@ -64,10 +10,6 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " 文字色
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " 背景色
 set background=dark
-
-" 補完などに使われるポップアップメニューを半透明化
-" 0 <= pumblend <= 100
-set pumblend=10
 
 " guifontを設定しないと文字化けになる。terminalで行ったフォントの設定と同様
 " 公式サイトではLinuxとmacOSの設定が若干異なるが、Linuxの設定でもmacOSで問題なし

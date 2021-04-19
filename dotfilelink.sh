@@ -1,5 +1,5 @@
 #!/bin/sh
-DOT_FILES=( .hyper.js .gitconfig .tmux.conf .powerline-shell.json )
+DOT_FILES=( .gitconfig .tmux.conf .vimrc )
 for file in ${DOT_FILES[@]}
 do
   ln -sfv ~/dotfiles/$file ~/$file
