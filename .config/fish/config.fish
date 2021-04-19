@@ -1,23 +1,24 @@
 export LANG=ja_JP.UTF-8
 
-# --------------------
-# bin
-# --------------------
+# set default login shell
+set -gx LOGIN_SHELL "/usr/local/bin/fish"
+
+# set bin
 set -g PATH /usr/local/bin $PATH
 
-# --------------------
-# git
-# --------------------
+# set nodenv
+eval (nodenv init - | source)
+
+# set rbenv
+eval (rbenv init - | source)
+
+# set git
 set -g PATH /usr/local/opt/git/bin $PATH
 
-# --------------------
-# Neovim
-# --------------------
+# set config for Neovim
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 
-# --------------------
-# TrueColor
-# --------------------
+# set TrueColor
 set -g TERM screen-256color
 
 # --------------------
@@ -68,13 +69,3 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 test -f /Users/satokoki/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /Users/satokoki/.ghcup/bin $PATH
 set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/sqlite/bin" $fish_user_paths
-
-# --------------------
-# nodenv
-# --------------------
-eval (nodenv init - | source)
-
-# --------------------
-# rbenv
-# --------------------
-eval (rbenv init - | source)
