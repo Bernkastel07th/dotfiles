@@ -57,20 +57,20 @@ colorscheme iceberg
 set t_Co=256
 
 " WSL用のクリップボード設定
-if system('uname -a | grep microsoft') != ""
-  let g:clipboard = {
-    \ 'name': 'wslClipboard',
-    \ 'copy': {
-    \   '+': 'win32yank.exe -i',
-    \   '*': 'win32yank.exe -i'
-    \ },
-    \ 'paste': {
-    \   '+': 'win32yank.exe -o',
-    \   '*': 'win32yank.exe -o'
-    \ },
-    \ 'cache_enabled': 1
-  }
-endif
+" if system('uname -a | grep microsoft') != ""
+"   let g:clipboard = {
+"     \ 'name': 'wslClipboard',
+"     \ 'copy': {
+"     \   '+': 'win32yank.exe -i',
+"     \   '*': 'win32yank.exe -i'
+"     \ },
+"     \ 'paste': {
+"     \   '+': 'win32yank.exe -o',
+"     \   '*': 'win32yank.exe -o'
+"     \ },
+"     \ 'cache_enabled': 1
+"   }
+" endif
 
 " to enable setting true color
 set termguicolors
