@@ -18,10 +18,10 @@
   bk = "!f() { git branch $1_bk`date \"+%Y%m%d%H%M%S\"`$2; }; f"
   ph = push origin HEAD
   pr = pull --rebase origin
-  fp = fetch --prune
+  f = fetch
   ru = remote update -p
 [credential]
-	helper = osxkeychain
+	helper = manager
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true

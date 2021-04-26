@@ -1,35 +1,37 @@
 export LANG=ja_JP.UTF-8
 
+# disable keyring
+set -x PYTHON_KEYRING_BACKEND "keyring.backends.null.Keyring"
+
 # set default login shell
-set -gx LOGIN_SHELL "/usr/local/bin/fish"
+set -gx LOGIN_SHELL "/usr/bin/fish"
+
+# set rust
+set -g PATH ~/.cargo/bin $PATH
 
 # set bin
 set -g PATH /usr/local/bin $PATH
 
-# set nodenv
-eval (nodenv init - | source)
+# x-server
+set NAME_SERVER (cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+set -x DISPLAY "$NAME_SERVER:0"
 
-# set rbenv
-eval (rbenv init - | source)
+# alias
+alias gocopy=~/go/bin/gocopy
+alias gopaste=~/go/bin/gopaste
+alias tig=~/bin/tig
 
-# set git
-set -g PATH /usr/local/opt/git/bin $PATH
-
-# set config for Neovim
+# Neovim
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 
-# set TrueColor
+# TrueColor
 set -g TERM screen-256color
 
-# --------------------
 # FZF
-# --------------------
-set -g FZF_LEGACY_KEYBINDINGS 0
-set -g FZF_REVERSE_ISEARCH_OPTS "--reverse --height=100%"
+set -U FZF_LEGACY_KEYBINDINGS 0
+set -U FZF_REVERSE_ISEARCH_OPTS "--reverse --height=100%"
 
-# --------------------
 # peco
-# --------------------
 set fish_plugins theme peco
 
 function fish_user_key_bindings
@@ -52,20 +54,10 @@ function peco_select_history_order
   end
 end
 
-# --------------------
 # bobthefish
-# --------------------
 set -g fish_prompt_pwd_dir_length 0  # ディレクトリ省略しない
 set -g theme_newline_cursor yes  # プロンプトを改行した先に設ける
 set -g theme_display_git_master_branch yes  # git の branch 名を表示
-set -g theme_color_scheme dracula
+set -g theme_color_scheme dracula # color theme
 set -g theme_display_date no  # 時刻を表示しないように設定
 set -g theme_display_cmd_duration no  # コマンド実行時間の非表示
-
-# --------------------
-# ghcup-env
-# --------------------
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-test -f /Users/satokoki/.ghcup/env ; and set -gx PATH $HOME/.cabal/bin /Users/satokoki/.ghcup/bin $PATH
-set -g fish_user_paths "/usr/local/opt/openssl@1.1/bin" $fish_user_paths
-set -g fish_user_paths "/usr/local/opt/sqlite/bin" $fish_user_paths

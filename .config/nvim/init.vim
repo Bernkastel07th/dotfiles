@@ -8,30 +8,28 @@ augroup MyAutoCmd
 augroup END
 
 " provider
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:ruby_host_prog = $NEOVIM_RUBY_HOST
-let g:node_host_prog = $HOME . '/.nodenv/versions/14.16.1/bin/neovim-node-host'
+let g:python3_host_prog = '/usr/bin/python3'
+let g:node_host_prog = $HOME . '/.nvm/versions/node/v16.0.0/bin/node'
+let g:coc_node_path = $HOME . '/.nvm/versions/node/v16.0.0/bin/node'
 
 " dein_setting {{{
-let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
-let s:dein_dir = s:cache_home . '/dein'
+let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
-    call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+    execute '!git clone https://github.com/Shougo/dein.vim ' s:dein_repo_dir
   endif
-  execute 'set runtimepath^=' . s:dein_repo_dir
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  let s:rc_dir    = expand('~/.config/nvim')
-  let s:toml      = s:rc_dir . '/dein/dein.toml'
-  let s:lazy_toml = s:rc_dir . '/dein/dein_lazy.toml'
-  " read toml and cache
+  let s:rc_dir    = expand('~/.config/nvim/dein')
+  let s:toml      = s:rc_dir . '/dein.toml'
+  let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
+
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
@@ -55,7 +53,24 @@ endif
 " }}}
 
 syntax enable
+colorscheme iceberg
 set t_Co=256
+
+" WSL用のクリップボード設定
+if system('uname -a | grep microsoft') != ""
+  let g:clipboard = {
+    \ 'name': 'wslClipboard',
+    \ 'copy': {
+    \   '+': 'win32yank.exe -i',
+    \   '*': 'win32yank.exe -i'
+    \ },
+    \ 'paste': {
+    \   '+': 'win32yank.exe -o',
+    \   '*': 'win32yank.exe -o'
+    \ },
+    \ 'cache_enabled': 1
+  }
+endif
 
 " to enable setting true color
 set termguicolors
