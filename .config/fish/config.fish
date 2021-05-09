@@ -1,4 +1,8 @@
-export LANG=ja_JP.UTF-8
+# typo encode
+set -x LANG ja_JP.UTF-8
+
+# typo encode for tig
+set -x LC_ALL en_US.UTF-8
 
 # disable keyring
 set -x PYTHON_KEYRING_BACKEND "keyring.backends.null.Keyring"
@@ -36,6 +40,7 @@ set -x DISPLAY "$NAME_SERVER:0"
 alias gocopy=~/go/bin/gocopy
 alias gopaste=~/go/bin/gopaste
 alias tig=~/bin/tig
+alias tmux='tmux -u'
 
 # Neovim
 set -gx XDG_CONFIG_HOME "$HOME/.config"

@@ -258,3 +258,6 @@ tnoremap <ESC> <C-\><C-n>
 " ターミナルモードでのタブ移動
 tnoremap <C-l> <C-\><C-n>gt
 tnoremap <C-h> <C-\><C-n>gT
+
+" markdown preview
+let g:previm_open_cmd = 'open -a chrome'
