@@ -39,7 +39,6 @@ set -x DISPLAY "$NAME_SERVER:0"
 # alias
 alias gocopy=~/go/bin/gocopy
 alias gopaste=~/go/bin/gopaste
-alias tig=~/bin/tig
 alias tmux='tmux -u'
 
 # Neovim
