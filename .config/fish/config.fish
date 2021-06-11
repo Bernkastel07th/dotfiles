@@ -8,20 +8,20 @@ set -x LC_ALL en_US.UTF-8
 set -x PYTHON_KEYRING_BACKEND "keyring.backends.null.Keyring"
 
 # github ssh settings
-set -gx SSH_AUTH_SOCK /tmp/ssh-YO4ipKQB7ZnS/agent.2833
+# set -gx SSH_AUTH_SOCK /tmp/ssh-YO4ipKQB7ZnS/agent.2833
 
-if [ -z "$SSH_AUTH_SOCK" ]
-  # Check for a currently running instance of the agent.
-  set RUNNING_AGENT "`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
-
-  if [ "RUNNING_AGENT" = "0" ]
-    # Launch a new instance of the agent.
-    eval (ssh-agent -c &> /usr/bin/ssh-agent)
-  end
-
-  eval (cat /usr/bin/ssh-agent)
-end
-ssh-add ~/.ssh/id_ed25519
+# if [ -z "$SSH_AUTH_SOCK" ]
+#   # Check for a currently running instance of the agent.
+#   set RUNNING_AGENT "`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
+#
+#   if [ "RUNNING_AGENT" = "0" ]
+#     # Launch a new instance of the agent.
+#     eval (ssh-agent -c &> /usr/bin/ssh-agent)
+#   end
+#
+#   eval (cat /usr/bin/ssh-agent)
+# end
+# ssh-add ~/.ssh/id_ed25519
 
 # set default login shell
 set -gx LOGIN_SHELL "/usr/bin/fish"
