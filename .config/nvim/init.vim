@@ -163,6 +163,11 @@ set splitright
 " 検索
 autocmd QuickFixCmdPost *grep* cwindow
 
+" 文字幅
+"" single: US-ASCIIの文字と同じ幅を使う(規定)
+"" double: ASCII文字の２倍の幅を使う
+set ambiwidth=double
+
 " <Leader>キーのマッピング
 let mapleader = ","
 
