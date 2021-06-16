@@ -2,7 +2,7 @@
 	name = Bernkastel07th
 	email = koki.sato.work@gmail.com
 [core]
-  editor = nvim
+  editor = vim
 [alias]
   st = !git status -s && git stash list | cat
   stt = status -uno
@@ -21,7 +21,7 @@
   fp = fetch --prune
   ru = remote update -p
 [credential]
-	helper = osxkeychain
+	helper = manager
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
