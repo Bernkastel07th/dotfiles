@@ -1,6 +1,5 @@
 # You can override some default right prompt options in your config.fish:
 #     set -g theme_date_format "+%a %H:%M"
-#     set -g theme_date_timezone America/Los_Angeles
 
 function __bobthefish_cmd_duration -S -d 'Show command duration'
     [ "$theme_display_cmd_duration" = "no" ]
@@ -63,14 +62,12 @@ function __bobthefish_timestamp -S -d 'Show the current timestamp'
     or set -l theme_date_format "+%c"
 
     echo -n ' '
-    set -q theme_date_timezone
-        and env TZ="$theme_date_timezone" date $theme_date_format
-        or date $theme_date_format
+    date $theme_date_format
 end
 
 function fish_right_prompt -d 'bobthefish is all about the right prompt'
     set -l __bobthefish_left_arrow_glyph \uE0B3
-    if [ "$theme_powerline_fonts" = "no" -a "$theme_nerd_fonts" != "yes" ]
+    if [ "$theme_powerline_fonts" = "no" ]
         set __bobthefish_left_arrow_glyph '<'
     end
 

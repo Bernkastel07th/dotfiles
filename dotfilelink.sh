@@ -1,12 +1,12 @@
-# files
-ln -sfv ~/dotfiles/.tmux.conf ~/.tmux.conf
-ln -sfv ~/dotfiles/.tmux.conf.wsl ~/.tmux.conf.wsl
-ln -sfv ~/dotfiles/.vimrc ~/.vimrc
-ln -sfv ~/dotfiles/.gitconfig ~/.gitconfig
-ln -sfv ~/dotfiles/.wslconfig ~/.wslconfig
+#!/bin/sh
+DOT_FILES=( .gitconfig .tmux.conf .vimrc )
+for file in ${DOT_FILES[@]}
+do
+  ln -sfv ~/dotfiles/$file ~/$file
+done
 
-# directory
-ln -sfv ~/dotfiles/.config/fish ~/.config
-ln -snv ~/dotfiles/.config/nvim ~/.config
-ln -snv ~/dotfiles/.config/coc ~/.config
-ln -snv ~/dotfiles/.config/alacritty ~/.config
+CONFIG_DIRS=( coc fish nvim )
+for dir in ${CONFIG_DIRS[@]}
+do
+  ln -sfv ~/dotfiles/.config/$dir ~/.config
+done
